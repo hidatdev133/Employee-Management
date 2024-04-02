@@ -1,5 +1,5 @@
 
-package hibernatebanhang.DAL;
+package DAL;
 
 import javax.persistence.*;
 import lombok.Data;

@@ -1,5 +1,5 @@
 
-package hibernatebanhang.DAL;
+package DAL;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,10 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import lombok.Data;
 import org.hibernate.*;
-/**
- *
- * @author caothanh
- */
+
+
 @Data
 @Entity
 @Table

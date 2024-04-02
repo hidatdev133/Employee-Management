@@ -2,7 +2,7 @@
 package GUI;
 
 import BLL.CategoryBLL;
-import hibernatebanhang.DAL.Category;
+import DAL.Category;
 import java.util.Iterator;
 import java.util.List;
 
