@@ -1,13 +1,13 @@
 package UI.Menu;
 
-import UI.ThietBi.ThietBi;
+import UI.ThietBi.thietbiPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JLabel;
 
 public class menuForm extends javax.swing.JFrame {
 
-    ThietBi tb = new ThietBi();
+    thietbiPanel tb = new thietbiPanel();
 
     public menuForm() {
         initComponents();
@@ -93,8 +93,8 @@ public class menuForm extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(153, 204, 255));
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/admin.png"))); // NOI18N
-        jLabel7.setText("jLabel7");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
