@@ -13,10 +13,15 @@ public class thietbiDAL {
     }
 
     public List loadThietbi() {
-        List<thietbi> tb;
-        session.beginTransaction();
-        tb = session.createQuery("FROM thietbi", thietbi.class).list();
-        session.getTransaction().commit();
+        List<thietbi> tb = null;
+        try {
+            session.beginTransaction();
+            tb = session.createQuery("FROM thietbi", thietbi.class).list();
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
+            ex.printStackTrace();
+        }
         return tb;
     }
 

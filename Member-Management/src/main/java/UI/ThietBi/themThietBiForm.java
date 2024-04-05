@@ -111,27 +111,22 @@ public class themThietBiForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        thietbiPanel tbPanel = new thietbiPanel();
+        tbPanel = new thietbiPanel();
         // Lấy thông tin từ các trường nhập liệu
-        int maTB = Integer.parseInt(txtMatb.getText());
+        String strMaTB = txtMatb.getText().trim();
         String tenTB = txtTentb.getText();
         String moTaTB = txtMota.getText();
 
         // Kiểm tra xem các trường dữ liệu có rỗng không
-        if (txtMatb.getText().trim().isEmpty() || tenTB.isEmpty()) {
+        if (strMaTB.isEmpty() || tenTB.isEmpty()) {
             // Hiển thị hộp thoại cảnh báo yêu cầu nhập đầy đủ thông tin
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Mã thiết bị hoặc tên thiết bị trống, vui lòng nhập đầy đủ thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return; // Không thực hiện thêm thiết bị nếu có trường dữ liệu rỗng
-        } else {
-            // Lấy giá trị của trường MaTB
-            try {
-                maTB = Integer.parseInt(txtMatb.getText().trim());
-            } catch (NumberFormatException e) {
-                // Hiển thị hộp thoại cảnh báo nếu trường MaTB không phải là số
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập số vào trường Mã thiết bị", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                return; // Không thực hiện thêm thiết bị nếu MaTB không phải là số
-            }
+        }
 
+        // Kiểm tra xem MaTB có phải là số nguyên hay không
+        try {
+            int maTB = Integer.parseInt(strMaTB);
             // Kiểm tra xem mã thiết bị đã tồn tại hay chưa
             if (tbDAL.isMaTbExisted(maTB)) {
                 // Hiển thị hộp thoại cảnh báo nếu mã thiết bị đã tồn tại
@@ -143,8 +138,11 @@ public class themThietBiForm extends javax.swing.JFrame {
             tbBLL.addThietbi(tbMoi); // Thêm thiết bị mới vào cơ sở dữ liệu
             if (tbBLL.isSuccess()) {
                 JOptionPane.showMessageDialog(this, "Đã thêm thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                tbPanel.loadThietbi(); // Cập nhật lại dữ liệu của bảng
+                tbPanel.loadThietbi();
             }
+        } catch (NumberFormatException e) {
+            // Hiển thị hộp thoại cảnh báo nếu MaTB không phải là số
+            JOptionPane.showMessageDialog(this, "Mã thiết bị phải là số nguyên", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnThemActionPerformed
 

@@ -24,9 +24,9 @@ import org.hibernate.Session;
 
 public class thietbiPanel extends javax.swing.JPanel {
 
-    private thietbiPanel tbPanel;
     private thietbiBLL tbBLL = new thietbiBLL();
-    themThietBiForm themtb = new themThietBiForm();
+    private themThietBiForm themtb = new themThietBiForm();
+    private thietbiDAL tbDAL = new thietbiDAL();
     DefaultTableModel model = new DefaultTableModel();
 
     public thietbiPanel() {
@@ -42,6 +42,7 @@ public class thietbiPanel extends javax.swing.JPanel {
             Object[] row = {tb.getMaTB(), tb.getTenTB(), tb.getMoTaTB()};
             model.addRow(row);
         }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -192,7 +193,6 @@ public class thietbiPanel extends javax.swing.JPanel {
             case 1: // Trường hợp nhập thông tin 1 thiết bị
                 themtb.setVisible(true);
                 themtb.setLocationRelativeTo(this);
-                loadThietbi();
                 break;
             case 2: // Trường hợp nhập theo file excel
                 importExcel();
@@ -203,39 +203,7 @@ public class thietbiPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cbThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        int selectedRow = jtQLTB.getSelectedRow();
-        if (selectedRow != -1) {
-            int maTB = Integer.parseInt(txtMatb.getText());
-            String tenTB = txtTentb.getText();
-            String moTaTB = txtMota.getText();
 
-            if (tenTB.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên thiết bị", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            try (Session session = HibernateUtils.getSessionFactory().openSession()) {
-                session.beginTransaction();
-
-                thietbi existingTB = session.get(thietbi.class, maTB);
-                if (existingTB != null) {
-                    existingTB.setTenTB(tenTB);
-                    existingTB.setMoTaTB(moTaTB);
-                    session.update(existingTB);
-                    session.getTransaction().commit();
-                    JOptionPane.showMessageDialog(this, "Đã sửa thông tin thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-
-                    // Reload data after updating
-                    loadThietbi();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Không tìm thấy thiết bị có mã: " + maTB, "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                }
-            } catch (HibernateException ex) {
-                JOptionPane.showMessageDialog(this, "Lỗi khi thực hiện cập nhật: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một thiết bị để sửa", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void importExcel() {
@@ -247,13 +215,19 @@ public class thietbiPanel extends javax.swing.JPanel {
             File file = chooser.getSelectedFile();
             try {
                 List<thietbi> importedData = readDataFromExcel(file);
-                if (importedData != null) {
-                    for (thietbi tb : importedData) {
-                        tbBLL.addThietbi(tb); // Thêm từng thiết bị vào cơ sở dữ liệu
+                int importedCount = 0; // Số lượng dữ liệu đã được nhập thành công
+                for (thietbi tb : importedData) {
+                    tbBLL.addThietbi(tb);
+                    if (tbBLL.isSuccess()) {
+                        importedCount++;
                     }
-                    JOptionPane.showMessageDialog(this, "Đã nhập dữ liệu từ Excel thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+                if (importedCount > 0) {
+                    JOptionPane.showMessageDialog(this, "Đã nhập thành công " + importedCount + " thiết bị từ Excel", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     // Sau khi thêm dữ liệu xong, cập nhật lại bảng hiển thị
                     loadThietbi();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Không có dữ liệu nào được nhập từ Excel", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (IOException | InvalidFormatException | ParseException ex) {
                 JOptionPane.showMessageDialog(this, "Lỗi khi nhập dữ liệu từ Excel: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -283,12 +257,24 @@ public class thietbiPanel extends javax.swing.JPanel {
                 maTB = (int) cellMaTB.getNumericCellValue();
             } catch (IllegalStateException | NumberFormatException e) {
                 // Nếu không thể chuyển đổi giá trị sang số, bỏ qua dòng này và hiển thị cảnh báo
-                System.err.println("Dòng " + (i + 1) + ": Mã thiết bị không hợp lệ, bỏ qua dữ liệu từ dòng này.");
+                JOptionPane.showMessageDialog(null, "Mã thiết bị không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 continue;
             }
 
             String tenTB = cellTenTB.getStringCellValue();
             String moTaTB = cellMoTaTB.getStringCellValue();
+
+            // Kiểm tra nếu mã thiết bị hoặc tên thiết bị trống
+            if (maTB == 0 || tenTB.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Mã thiết bị hoặc tên thiết bị trống, vui lòng nhập dữ liệu cho dòng này.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                continue;
+            }
+
+            // Kiểm tra nếu mã thiết bị đã tồn tại trong cơ sở dữ liệu
+            if (tbDAL.isMaTbExisted(maTB)) {
+                JOptionPane.showMessageDialog(null, "Mã thiết bị đã tồn tại trong cơ sở dữ liệu.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                continue;
+            }
 
             thietbi tb = new thietbi(maTB, tenTB, moTaTB);
             importedData.add(tb);
@@ -297,15 +283,6 @@ public class thietbiPanel extends javax.swing.JPanel {
         return importedData;
     }
 
-    public static void main(String[] args) {
-        thietbiPanel tbPanel = new thietbiPanel();
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                tbPanel.setVisible(true);
-
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
