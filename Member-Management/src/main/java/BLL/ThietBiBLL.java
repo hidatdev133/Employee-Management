@@ -7,6 +7,7 @@ import java.util.List;
 public class thietbiBLL {
 
     private thietbiDAL tbDAL;
+    private boolean isSuccess;
 
     public thietbiBLL() {
         this.tbDAL = new thietbiDAL();
@@ -18,15 +19,37 @@ public class thietbiBLL {
     }
 
     public void addThietbi(thietbi tb) {
-        tbDAL.addThietbi(tb);
+        // Thực hiện thêm thiết bị
+        try {
+            tbDAL.addThietbi(tb); // Gọi phương thức thêm thiết bị từ DAL
+            isSuccess = true; // Gán true cho biến isSuccess nếu không có ngoại lệ nào xảy ra
+        } catch (Exception e) {
+            isSuccess = false; // Nếu có ngoại lệ, gán false cho biến isSuccess
+            e.printStackTrace(); // In thông báo lỗi (nếu cần)
+        }
     }
 
     public void updateThietbi(thietbi tb) {
-        tbDAL.updateThietbi(tb);
+        try {
+            tbDAL.updateThietbi(tb); // Gọi phương thức thêm thiết bị từ DAL
+            isSuccess = true; // Gán true cho biến isSuccess nếu không có ngoại lệ nào xảy ra
+        } catch (Exception e) {
+            isSuccess = false; // Nếu có ngoại lệ, gán false cho biến isSuccess
+            e.printStackTrace(); // In thông báo lỗi (nếu cần)
+        }
     }
 
     public void deleteThietbi(thietbi tb) {
-        tbDAL.deleteThietbi(tb);
+        try {
+            tbDAL.deleteThietbi(tb); // Gọi phương thức thêm thiết bị từ DAL
+            isSuccess = true; // Gán true cho biến isSuccess nếu không có ngoại lệ nào xảy ra
+        } catch (Exception e) {
+            isSuccess = false; // Nếu có ngoại lệ, gán false cho biến isSuccess
+            e.printStackTrace(); // In thông báo lỗi (nếu cần)
+        }
     }
 
+    public boolean isSuccess() {
+        return isSuccess;
+    }
 }

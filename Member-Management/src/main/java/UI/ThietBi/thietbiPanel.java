@@ -1,7 +1,9 @@
 package UI.ThietBi;
 
 import BLL.thietbiBLL;
+import DAL.HibernateUtils;
 import DAL.ThietBi.thietbi;
+import DAL.ThietBi.thietbiDAL;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +19,15 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Cell;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 public class thietbiPanel extends javax.swing.JPanel {
 
+    private thietbiPanel tbPanel;
     private thietbiBLL tbBLL = new thietbiBLL();
-    DefaultTableModel model;
     themThietBiForm themtb = new themThietBiForm();
+    DefaultTableModel model = new DefaultTableModel();
 
     public thietbiPanel() {
         initComponents();
@@ -30,16 +35,9 @@ public class thietbiPanel extends javax.swing.JPanel {
     }
 
     public void loadThietbi() {
-        // Get the list of thietbi objects from the BLL
         List<thietbi> thietbiList = tbBLL.loadThietbi();
-
-        // Create a DefaultTableModel for the table jtQLTB
         model = (DefaultTableModel) jtQLTB.getModel();
-
-        // Clear existing rows from the table
         model.setRowCount(0);
-
-        // Iterate through the thietbiList and add each thietbi object to the table
         for (thietbi tb : thietbiList) {
             Object[] row = {tb.getMaTB(), tb.getTenTB(), tb.getMoTaTB()};
             model.addRow(row);
@@ -50,12 +48,12 @@ public class thietbiPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtMatb = new javax.swing.JTextField();
+        txtMatb = new javax.swing.JTextField();
         txtID = new javax.swing.JLabel();
         txtName = new javax.swing.JLabel();
-        jtTentb = new javax.swing.JTextField();
+        txtTentb = new javax.swing.JTextField();
         txtDes = new javax.swing.JLabel();
-        jtMota = new javax.swing.JTextField();
+        txtMota = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtQLTB = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -94,6 +92,11 @@ public class thietbiPanel extends javax.swing.JPanel {
         jLabel4.setText("QUẢN LÝ THIẾT BỊ");
 
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xóa");
 
@@ -120,7 +123,7 @@ public class thietbiPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtID)
                                 .addGap(57, 57, 57)
-                                .addComponent(jtMatb, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtMatb, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnSua)
                             .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -129,8 +132,8 @@ public class thietbiPanel extends javax.swing.JPanel {
                                     .addComponent(txtDes))
                                 .addGap(43, 43, 43)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtTentb, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                    .addComponent(jtMota)))
+                                    .addComponent(txtTentb, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(txtMota)))
                             .addComponent(cbThem, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -149,16 +152,16 @@ public class thietbiPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtMatb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMatb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtID))
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtName)
-                            .addComponent(jtTentb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTentb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDes)
-                            .addComponent(jtMota, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtMota, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40)
                         .addComponent(cbThem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -172,13 +175,14 @@ public class thietbiPanel extends javax.swing.JPanel {
     private void jtQLTBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtQLTBMouseClicked
         int i = jtQLTB.getSelectedRow();
         if (i >= 0) {
-            jtMatb.setText(model.getValueAt(i, 0).toString());
-            jtTentb.setText(model.getValueAt(i, 1).toString());
-            jtMota.setText(model.getValueAt(i, 2).toString());
+            txtMatb.setText(model.getValueAt(i, 0).toString());
+            txtTentb.setText(model.getValueAt(i, 1).toString());
+            txtMota.setText(model.getValueAt(i, 2).toString());
         }
     }//GEN-LAST:event_jtQLTBMouseClicked
 
     private void cbThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbThemActionPerformed
+
         // Lấy lựa chọn từ combo box
         int luaChon = cbThem.getSelectedIndex();
         switch (luaChon) {
@@ -188,6 +192,7 @@ public class thietbiPanel extends javax.swing.JPanel {
             case 1: // Trường hợp nhập thông tin 1 thiết bị
                 themtb.setVisible(true);
                 themtb.setLocationRelativeTo(this);
+                loadThietbi();
                 break;
             case 2: // Trường hợp nhập theo file excel
                 importExcel();
@@ -196,6 +201,42 @@ public class thietbiPanel extends javax.swing.JPanel {
                 break;
         }
     }//GEN-LAST:event_cbThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        int selectedRow = jtQLTB.getSelectedRow();
+        if (selectedRow != -1) {
+            int maTB = Integer.parseInt(txtMatb.getText());
+            String tenTB = txtTentb.getText();
+            String moTaTB = txtMota.getText();
+
+            if (tenTB.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên thiết bị", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+                session.beginTransaction();
+
+                thietbi existingTB = session.get(thietbi.class, maTB);
+                if (existingTB != null) {
+                    existingTB.setTenTB(tenTB);
+                    existingTB.setMoTaTB(moTaTB);
+                    session.update(existingTB);
+                    session.getTransaction().commit();
+                    JOptionPane.showMessageDialog(this, "Đã sửa thông tin thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+                    // Reload data after updating
+                    loadThietbi();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Không tìm thấy thiết bị có mã: " + maTB, "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (HibernateException ex) {
+                JOptionPane.showMessageDialog(this, "Lỗi khi thực hiện cập nhật: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một thiết bị để sửa", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     private void importExcel() {
         JFileChooser chooser = new JFileChooser();
@@ -272,13 +313,13 @@ public class thietbiPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbThem;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jtMatb;
-    private javax.swing.JTextField jtMota;
     private javax.swing.JTable jtQLTB;
-    private javax.swing.JTextField jtTentb;
     private javax.swing.JLabel txtDes;
     private javax.swing.JLabel txtID;
+    private javax.swing.JTextField txtMatb;
+    private javax.swing.JTextField txtMota;
     private javax.swing.JLabel txtName;
+    private javax.swing.JTextField txtTentb;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -42,10 +42,24 @@ public class thietbiDAL {
     }
 
     public void updateThietbi(thietbi tb) {
-        session.update(tb);
+        try {
+            session.beginTransaction();
+            session.update(tb);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
+            ex.printStackTrace();
+        }
     }
 
     public void deleteThietbi(thietbi tb) {
-//        session.delete(tb);
+        try {
+            session.beginTransaction();
+            session.delete(tb);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
+            ex.printStackTrace();
+        }
     }
 }
