@@ -31,7 +31,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="txtID" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-                              <Component id="txtMatb" min="-2" pref="272" max="-2" attributes="0"/>
+                              <Component id="jtMatb" min="-2" pref="272" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -40,8 +40,8 @@
                               </Group>
                               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtTentb" max="32767" attributes="0"/>
-                                  <Component id="txtMota" max="32767" attributes="0"/>
+                                  <Component id="jtTentb" max="32767" attributes="0"/>
+                                  <Component id="jtMota" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -64,18 +64,18 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtMatb" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jtMatb" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="txtID" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtTentb" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jtTentb" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtDes" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtMota" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jtMota" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -94,16 +94,16 @@
         <Property name="text" type="java.lang.String" value="T&#xea;n thi&#x1ebf;t b&#x1ecb;:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtTentb">
+    <Component class="javax.swing.JTextField" name="jtTentb">
     </Component>
     <Component class="javax.swing.JLabel" name="txtDes">
       <Properties>
         <Property name="text" type="java.lang.String" value="M&#xf4; t&#x1ea3; thi&#x1ebf;t b&#x1ecb;:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtMota">
+    <Component class="javax.swing.JTextField" name="jtMota">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtMatb">
+    <Component class="javax.swing.JTextField" name="jtMatb">
     </Component>
     <Component class="javax.swing.JLabel" name="txtID">
       <Properties>

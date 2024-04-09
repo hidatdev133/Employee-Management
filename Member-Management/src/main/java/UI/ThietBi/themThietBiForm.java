@@ -1,19 +1,17 @@
 package UI.ThietBi;
 
-import BLL.thietbiBLL;
+import BLL.ThietBiBLL;
 import DAL.ThietBi.thietbi;
-import DAL.ThietBi.thietbiDAL;
+import DAL.ThietBi.ThietBiDAL;
 import javax.swing.JOptionPane;
 
 public class themThietBiForm extends javax.swing.JFrame {
 
-    private thietbiBLL tbBLL = new thietbiBLL();
-    private thietbiDAL tbDAL = new thietbiDAL();
-    private thietbiPanel tbPanel;
+    private ThietBiBLL tbBLL = new ThietBiBLL();
+    private ThietBiDAL tbDAL = new ThietBiDAL();
 
     public themThietBiForm() {
         initComponents();
-
     }
 
     @SuppressWarnings("unchecked")
@@ -21,10 +19,10 @@ public class themThietBiForm extends javax.swing.JFrame {
     private void initComponents() {
 
         txtName = new javax.swing.JLabel();
-        txtTentb = new javax.swing.JTextField();
+        jtTentb = new javax.swing.JTextField();
         txtDes = new javax.swing.JLabel();
-        txtMota = new javax.swing.JTextField();
-        txtMatb = new javax.swing.JTextField();
+        jtMota = new javax.swing.JTextField();
+        jtMatb = new javax.swing.JTextField();
         txtID = new javax.swing.JLabel();
         btnReset = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
@@ -66,15 +64,15 @@ public class themThietBiForm extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtID)
                                 .addGap(57, 57, 57)
-                                .addComponent(txtMatb, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jtMatb, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtName)
                                     .addComponent(txtDes))
                                 .addGap(43, 43, 43)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTentb)
-                                    .addComponent(txtMota)))))
+                                    .addComponent(jtTentb)
+                                    .addComponent(jtMota)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(96, 96, 96)
                         .addComponent(btnReset)
@@ -89,16 +87,16 @@ public class themThietBiForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMatb, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtMatb, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtID))
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtName)
-                    .addComponent(txtTentb, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtTentb, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDes)
-                    .addComponent(txtMota, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtMota, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReset)
@@ -111,22 +109,27 @@ public class themThietBiForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        tbPanel = new thietbiPanel();
+        thietbiPanel tbPanel = new thietbiPanel();
         // Lấy thông tin từ các trường nhập liệu
-        String strMaTB = txtMatb.getText().trim();
-        String tenTB = txtTentb.getText();
-        String moTaTB = txtMota.getText();
+        int maTB = Integer.parseInt(jtMatb.getText());
+        String tenTB = jtTentb.getText();
+        String moTaTB = jtMota.getText();
 
         // Kiểm tra xem các trường dữ liệu có rỗng không
-        if (strMaTB.isEmpty() || tenTB.isEmpty()) {
+        if (jtMatb.getText().trim().isEmpty() || tenTB.isEmpty() || moTaTB.isEmpty()) {
             // Hiển thị hộp thoại cảnh báo yêu cầu nhập đầy đủ thông tin
-            JOptionPane.showMessageDialog(this, "Mã thiết bị hoặc tên thiết bị trống, vui lòng nhập đầy đủ thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return; // Không thực hiện thêm thiết bị nếu có trường dữ liệu rỗng
-        }
+        } else {
+            // Lấy giá trị của trường MaTB
+            try {
+                maTB = Integer.parseInt(jtMatb.getText().trim());
+            } catch (NumberFormatException e) {
+                // Hiển thị hộp thoại cảnh báo nếu trường MaTB không phải là số
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số vào trường Mã thiết bị", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return; // Không thực hiện thêm thiết bị nếu MaTB không phải là số
+            }
 
-        // Kiểm tra xem MaTB có phải là số nguyên hay không
-        try {
-            int maTB = Integer.parseInt(strMaTB);
             // Kiểm tra xem mã thiết bị đã tồn tại hay chưa
             if (tbDAL.isMaTbExisted(maTB)) {
                 // Hiển thị hộp thoại cảnh báo nếu mã thiết bị đã tồn tại
@@ -135,22 +138,26 @@ public class themThietBiForm extends javax.swing.JFrame {
             }
             // Tạo một đối tượng thietbi mới
             thietbi tbMoi = new thietbi(maTB, tenTB, moTaTB);
-            tbBLL.addThietbi(tbMoi); // Thêm thiết bị mới vào cơ sở dữ liệu
-            if (tbBLL.isSuccess()) {
-                JOptionPane.showMessageDialog(this, "Đã thêm thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                tbPanel.loadThietbi();
-            }
-        } catch (NumberFormatException e) {
-            // Hiển thị hộp thoại cảnh báo nếu MaTB không phải là số
-            JOptionPane.showMessageDialog(this, "Mã thiết bị phải là số nguyên", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+
+            // Thêm thiết bị mới vào cơ sở dữ liệu
+            tbBLL.addThietbi(tbMoi);
+            JOptionPane.showMessageDialog(this, "Đã thêm thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+            // Set visibility of current frame to false
+            setVisible(false);
+            tbPanel.setVisible(true);
+            tbPanel.loadThietbi();
+
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-        tbPanel = new thietbiPanel();
+        // Set visibility of current frame to false
         setVisible(false);
+
+        // Show thietbiPanel
+        thietbiPanel tbPanel = new thietbiPanel();
         tbPanel.setVisible(true);
-        tbPanel.loadThietbi();
 
     }//GEN-LAST:event_btnbackActionPerformed
 
@@ -166,11 +173,11 @@ public class themThietBiForm extends javax.swing.JFrame {
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnback;
+    private javax.swing.JTextField jtMatb;
+    private javax.swing.JTextField jtMota;
+    private javax.swing.JTextField jtTentb;
     private javax.swing.JLabel txtDes;
     private javax.swing.JLabel txtID;
-    private javax.swing.JTextField txtMatb;
-    private javax.swing.JTextField txtMota;
     private javax.swing.JLabel txtName;
-    private javax.swing.JTextField txtTentb;
     // End of variables declaration//GEN-END:variables
 }
