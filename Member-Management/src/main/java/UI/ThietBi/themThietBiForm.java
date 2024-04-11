@@ -10,6 +10,7 @@ public class themThietBiForm extends javax.swing.JFrame {
     private ThietBiBLL tbBLL = new ThietBiBLL();
     private ThietBiDAL tbDAL = new ThietBiDAL();
 
+
     public themThietBiForm() {
         initComponents();
     }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAL.ThanhVien;
 
 import javax.persistence.Column;
@@ -12,32 +8,29 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Data;
 
-/**
- *
- * @author Admin
- */
 @Entity
 @Data
 @Table(name = "thanhvien")
 public class thanhvien {
+
     @Id
     private int MaTV;
-    
+
     @Column
     private String HoTen;
-    
+
     @Column
     private String Khoa;
-    
+
     @Column
     private String Nganh;
-    
+
     @Column
     private int SDT;
-    
+
     @Column
     private String Password;
-    
+
     @Column
     private String Email;
 
@@ -54,6 +47,4 @@ public class thanhvien {
         this.Email = Email;
     }
 
-
-    
 }
