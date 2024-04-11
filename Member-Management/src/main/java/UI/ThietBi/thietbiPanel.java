@@ -202,6 +202,17 @@ public class thietbiPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbThemActionPerformed
 
+
+    public static void main(String[] args) {
+        thietbiPanel tbPanel = new thietbiPanel();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                tbPanel.setVisible(true);
+            }
+        });
+    }
+
+
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         int selectedRow = jtQLTB.getSelectedRow();
         if (selectedRow != -1) {
