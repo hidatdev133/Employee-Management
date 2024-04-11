@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th3 24, 2024 lúc 03:41 PM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.0.30
+-- Thời gian đã tạo: Th4 10, 2024 lúc 10:41 AM
+-- Phiên bản máy phục vụ: 10.4.28-MariaDB
+-- Phiên bản PHP: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,18 +32,36 @@ CREATE TABLE `thanhvien` (
   `HoTen` varchar(100) NOT NULL,
   `Khoa` varchar(100) DEFAULT NULL,
   `Nganh` varchar(100) DEFAULT NULL,
-  `SDT` int(10) DEFAULT NULL
+  `SDT` int(10) DEFAULT NULL,
+  `PassWord` varchar(50) NOT NULL,
+  `Email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `thanhvien`
 --
 
-INSERT INTO `thanhvien` (`MaTV`, `HoTen`, `Khoa`, `Nganh`, `SDT`) VALUES
-(1120150184, 'Trần Thị Nữ', 'GDTH', 'GDTH', 1111111111),
-(1121530087, 'Trần Thiếu Nam', 'TLH', 'QLGD', 1111111112),
-(1123330257, 'Ngô Tuyết Nhi', 'QTKD', 'QTKD', 1111111113),
-(2147483647, 'Nguyễn Văn Nam', 'CNTT', 'HTTT', 123456789);
+INSERT INTO `thanhvien` (`MaTV`, `HoTen`, `Khoa`, `Nganh`, `SDT`, `PassWord`, `Email`) VALUES
+(1120010007, 'Nguyễn Gia Mai', 'Toán UD', 'Toán', 911200100, '1120010007', '1120010007@gmail.com'),
+(1120020019, 'Chu Phúc Ngọc', 'SP KHXH', 'Lí', 911200200, '11200200019', '11200200019@gmail.com'),
+(1120090014, 'Nguyễn Thị Mỹ Ngân', 'SP KHXH', 'Văn', 911200900, '11200900014', '11200900014@gmail.com'),
+(1120090018, 'Trần Thị Anh Ngọc', 'SP KHXH', 'Văn', 911200900, '11200900018', '11200900018@gmail.com'),
+(1120380064, 'Nguyễn Ngọc Quỳnh Lực', 'Ngoại Ngữ', 'NNA', 911203800, '1120380064', '1120380064@gmail.com'),
+(1120410311, 'Lê Việt Nga', 'CNTT', 'CNTT', 911204103, '11204110311', '11204110311@gmail.com'),
+(1120480015, 'Trần Phạm Ngọc Ly', 'Toán UD', 'Toán', 911204800, '1120480015', '1120480015@gmail.com'),
+(1120480216, 'Nguyễn Trần Thái Ngọc', 'Toán UD', 'Toán', 911204802, '11204800216', '11204800216@gmail.com'),
+(1120480217, 'Trần Minh Phúc Ngọc', 'Toán UD', 'Toán', 911204802, '11204800217', '11204800217@gmail.com'),
+(1121020009, 'Bùi Đình Thái My', 'SP KHTN', 'Lí', 911210200, '1121020009', '1121020009@gmail.com'),
+(1121100003, 'Nguyễn Đắc Phương Linh', 'SP KHXH', 'Sử', 911211000, '1121100003', '1121100003@gmail.com'),
+(1121100012, 'Trương Hoài Nga', 'SP KHXH', 'Sử', 911211000, '11211000012', '11211000012@gmail.com'),
+(1121110001, 'Phạm Thị Lan Khôi', 'SP KHXH', 'Địa', 911211100, '1121110001', '1121110001@gmail.com'),
+(1121130012, 'Lê Ngọc lan', 'Ngoại Ngữ', 'Anh', 911211300, '1121130012', '1121130012@gmail.com'),
+(1122090010, 'Lê Xuân Nam', 'SP KHXH', 'Văn', 911220900, '11220900010', '11220900010@gmail.com'),
+(1122090013, 'Nguyễn Mỹ Ngân', 'SP KHXH', 'Văn', 911220900, '11220900013', '11220900013@gmail.com'),
+(1122090015, 'Nguyễn Thủy Triều Ngọc', 'SP KHXH', 'Văn', 911220900, '11220900015', '11204800216@gmail.com'),
+(1122530016, 'Lê Thục Ly', 'QLGD', 'TLH', 911225300, '1122530016', '1122530016@gmail.com'),
+(1122550008, 'Nguyễn Gia My', 'QTKD', 'QTKD', 911225500, '1122550008', '1122550008@gmail.com'),
+(2147483647, 'Nguyễn Văn Nam', 'CNTT', 'HTTT', 123456789, '', '');
 
 -- --------------------------------------------------------
 
@@ -62,9 +80,24 @@ CREATE TABLE `thietbi` (
 --
 
 INSERT INTO `thietbi` (`MaTB`, `TenTB`, `MoTaTB`) VALUES
-(1000001, 'Micro', 'Micro không dây MS2023'),
-(1000002, 'Micro', 'Micro không dây MS2024'),
-(1000003, 'Bảng điện tử', 'Bản điện tử trình chiếu');
+(120191, 'Micro không dây 01', 'JBL VM 2001'),
+(120192, 'Micro có dây 01', 'MCCD 1001'),
+(120203, 'Micro không dây 02', 'BCE 9001'),
+(120214, 'Micro không dây 03', 'M3001'),
+(120235, 'Micro không dây 03', 'BCE UGX12'),
+(220191, 'Máy chiếu Panasonic', 'PNSN 031'),
+(320201, 'Máy ảnh Fuji', 'FJ 20201'),
+(420201, 'Cassette Sony', 'CN 20201'),
+(420212, 'Cassette Sony', 'CN 20211'),
+(420213, 'Cassette TQ', 'CSTQ 20211'),
+(420224, 'Cassette Sony', 'CS 20221'),
+(420236, 'Cassette Sony', 'CS 2023'),
+(520221, 'Tivi LG', 'TVLG021'),
+(520222, 'Tivi Samsung', 'TVSS20221'),
+(620231, 'Quạt đứng', 'QD 20231'),
+(620232, 'Quạt đứng', 'QD 20232'),
+(620233, 'Quạt đứng', 'QD 20233'),
+(620234, 'Quạt đứng', 'QD 20234');
 
 -- --------------------------------------------------------
 
@@ -86,8 +119,23 @@ CREATE TABLE `thongtinsd` (
 --
 
 INSERT INTO `thongtinsd` (`MaTT`, `MaTV`, `MaTB`, `TGVao`, `TGMuon`, `TGTra`) VALUES
-(1, 1120150184, NULL, '2024-01-05 09:00:00', NULL, NULL),
-(2, 1123330257, 1000001, NULL, '2024-02-12 10:00:32', '2024-02-12 14:00:00');
+(6, 1121110001, NULL, '0004-04-24 10:39:00', NULL, NULL),
+(7, 1121130012, NULL, '0004-04-24 10:39:00', NULL, NULL),
+(8, 1121100003, NULL, '0004-04-24 10:40:00', NULL, NULL),
+(9, 1121110001, NULL, '0004-05-24 08:39:00', NULL, NULL),
+(10, 1121130012, NULL, '0004-05-24 08:50:00', NULL, NULL),
+(11, 1121100003, NULL, '0004-05-24 09:55:00', NULL, NULL),
+(12, 1121110001, 220191, NULL, '0003-05-24 08:50:00', '0003-05-24 12:50:00'),
+(13, 2147483647, 120203, NULL, '0003-05-24 09:50:00', '0003-05-24 12:53:00'),
+(14, 2147483647, 320201, NULL, '0003-07-24 11:00:00', '0003-07-24 13:00:00'),
+(15, 2147483647, 420201, NULL, '0003-08-24 10:00:00', '0003-08-24 16:00:00'),
+(16, 2147483647, 120214, NULL, '0003-09-24 09:00:00', '0003-09-24 11:00:00'),
+(17, 2147483647, 420212, NULL, '0003-10-24 13:00:00', '0003-10-24 13:30:00'),
+(18, 2147483647, 420213, NULL, '0003-12-24 09:11:00', '0003-12-24 11:12:00'),
+(19, 2147483647, 520221, NULL, '0003-12-24 09:17:00', NULL),
+(20, 1122550008, 620231, NULL, '0000-00-00 00:00:00', NULL),
+(21, 1121020009, 620232, NULL, '0000-00-00 00:00:00', NULL),
+(22, 2147483647, 620233, NULL, '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -109,9 +157,14 @@ CREATE TABLE `xuly` (
 --
 
 INSERT INTO `xuly` (`MaXL`, `MaTV`, `HinhThucXL`, `SoTien`, `NgayXL`, `TrangThaiXL`) VALUES
-(1, 1121530087, 'Khóa thẻ 1 tháng', NULL, '2023-09-12 08:00:00', 0),
-(2, 2147483647, 'Khóa thẻ 2 tháng', NULL, '2023-09-12 08:00:00', 0),
-(3, 1123330257, 'Bồi thường mất tài sản', 300000, '2023-09-12 08:00:00', 0);
+(10, 1121110001, 'Khóa thẻ 1 tháng', NULL, '0002-01-24 10:00:00', 0),
+(11, 1121130012, 'Khóa thẻ 1 tháng', NULL, '0002-02-24 10:59:00', 0),
+(12, 1121100003, 'Khóa thẻ 1 tháng', NULL, '0002-03-24 10:58:00', 0),
+(13, 1120380064, 'Khóa thẻ 2 tháng', NULL, '0003-04-24 10:58:00', 1),
+(14, 1121110001, 'Bồi thường', 300000, '0003-05-24 10:58:00', 0),
+(15, 1121130012, 'Bồi thường', 200000, '0003-06-24 10:58:00', 0),
+(16, 1121100003, 'Khóa thẻ 1 tháng và bồi thường', 100000, '0003-07-24 10:58:00', 0),
+(18, 2147483647, 'Khóa thẻ 2 tháng', NULL, '0003-09-24 10:58:00', 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ

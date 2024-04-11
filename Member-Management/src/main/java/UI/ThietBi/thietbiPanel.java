@@ -203,7 +203,39 @@ public class thietbiPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cbThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        int selectedRow = jtQLTB.getSelectedRow();
+        if (selectedRow != -1) {
+            int maTB = Integer.parseInt(txtMatb.getText());
+            String tenTB = txtTentb.getText();
+            String moTaTB = txtMota.getText();
 
+            if (tenTB.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên thiết bị", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+                session.beginTransaction();
+
+                thietbi existingTB = session.get(thietbi.class, maTB);
+                if (existingTB != null) {
+                    existingTB.setTenTB(tenTB);
+                    existingTB.setMoTaTB(moTaTB);
+                    session.update(existingTB);
+                    session.getTransaction().commit();
+                    JOptionPane.showMessageDialog(this, "Đã sửa thông tin thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+                    // Reload data after updating
+                    loadThietbi();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Không tìm thấy thiết bị có mã: " + maTB, "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (HibernateException ex) {
+                JOptionPane.showMessageDialog(this, "Lỗi khi thực hiện cập nhật: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một thiết bị để sửa", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void importExcel() {
