@@ -1,14 +1,14 @@
 package UI.ThietBi;
 
-import BLL.ThietBiBLL;
+import BLL.thietbiBLL;
 import DAL.ThietBi.thietbi;
-import DAL.ThietBi.ThietBiDAL;
+import DAL.ThietBi.thietbiDAL;
 import javax.swing.JOptionPane;
 
 public class themThietBiForm extends javax.swing.JFrame {
 
-    private ThietBiBLL tbBLL = new ThietBiBLL();
-    private ThietBiDAL tbDAL = new ThietBiDAL();
+    private thietbiBLL tbBLL = new thietbiBLL();
+    private thietbiDAL tbDAL = new thietbiDAL();
 
 
     public themThietBiForm() {
