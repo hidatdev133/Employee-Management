@@ -1,7 +1,11 @@
 package DAL.ThietBi;
 
+import DAL.ThongTinSuDung.thongtinsd;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 import lombok.Data;
+//import org.hibernate.mapping.Set;
 
 @Entity
 public class thietbi {
@@ -46,7 +50,8 @@ public class thietbi {
         this.MoTaTB = MoTaTB;
     }
     
-//    @OneToMany (mappedBy = "thongtinsd")
-//    private List<thongtinsd> listttsd; 
+    
+    @OneToMany(mappedBy = "thietbi", cascade = CascadeType.ALL)
+    private List<thongtinsd> listttsd;
     
 }

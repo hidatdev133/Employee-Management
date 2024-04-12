@@ -19,6 +19,7 @@
         <!-- Show all executed SQL to console -->
         <property name="show_sql">true</property>
         <mapping class="DAL.ThietBi.thietbi" /> 
+        <mapping class="DAL.ThongTinSuDung.thongtinsd" /> 
        
     </session-factory>
 </hibernate-configuration>
