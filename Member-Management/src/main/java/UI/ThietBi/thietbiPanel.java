@@ -448,9 +448,13 @@ public class thietbiPanel extends javax.swing.JPanel {
                     try {
                         int maquydinh = Integer.parseInt(search);
                         System.out.println("maquydinh: " + search);
-                        tbBLL.deleteThietbiByPrefix(maquydinh);
+                        if(tbBLL.deleteThietbiByMaQuyDinh(maquydinh)){
+                            JOptionPane.showMessageDialog(this, "Đã xóa những thiết bị theo mã quy định thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "Xóa thiết bị không thành công", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                        }
                     } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Invalid grade format");
+                        JOptionPane.showMessageDialog(this, "Mã quy định không đúng");
                     }
 
                 }

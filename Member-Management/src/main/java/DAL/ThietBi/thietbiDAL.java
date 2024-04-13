@@ -76,69 +76,75 @@ public class thietbiDAL {
         boolean success = false;
         try {
             transaction = session.beginTransaction();
+
+            // Tìm các mã thiết bị cần xóa dựa trên từ khóa
+            String hqlSelect = "SELECT tb.MaTB FROM thietbi tb WHERE CAST(tb.MaTB AS string) LIKE :keyword "
+                    + "AND (tb.MaTB NOT IN (SELECT ttsd.MaTB FROM thongtinsd ttsd WHERE "
+                    + "ttsd.MaTB = tb.MaTB AND (ttsd.TGTra IS NULL OR ttsd.TGTra = '0000-00-00 00:00:00')) "
+                    + "OR NOT EXISTS (SELECT 1 FROM thongtinsd ttsd WHERE ttsd.MaTB = tb.MaTB))";
+            Query querySelect = session.createQuery(hqlSelect);
+            querySelect.setParameter("keyword", maTb + "");
+            List<String> maTBexist = querySelect.list();
+
+            // Tạo câu lệnh SQL DELETE
+            String sqlDelete = "DELETE FROM ThietBi WHERE MaTB IN (:maTBList)";
+            Query queryDelete = session.createSQLQuery(sqlDelete);
+            queryDelete.setParameterList("maTBList", maTBexist);
+            int rowCount = queryDelete.executeUpdate();
             
-            // Kiểm tra nếu có thông tin sử dụng liên kết với thời gian trả khác null thì không xóa
-            String nativeQuery = "DELETE FROM thietbi WHERE MaTB = :maTB AND MaTB IN "
-                    + "(SELECT MaTB FROM thongtinsd WHERE TGTra IS NOT NULL OR "
-                    + "TGTra <> '0000-00-00 00:00:00')";
-            NativeQuery<?> query = session.createSQLQuery(nativeQuery);
-            query.setParameter("maTB", maTb);
-            int rowsAffected = query.executeUpdate();
-            
-            if (rowsAffected > 0) {
+            if(rowCount > 0){
                 success = true;
-            } else {
-                System.out.println("Không tìm thấy hoặc không thể xóa thiết bị có mã " + maTb);
+            }else{
+                success = false;
             }
-            
-//            thietbi tb = session.get(thietbi.class, maTb);
-//            session.delete(tb);
+
             transaction.commit();
-            
+            success = true;
         } catch (Exception ex) {
-            session.getTransaction().rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
             ex.printStackTrace();
-            success = false;
+        } finally {
+            session.close();
         }
         return success;
     }
     
-    public boolean deleteThietbiByPrefix(int keyword) {
+    public boolean deleteThietbiByMaQuyDinh(int maQuyDinh) {
         session = HibernateUtils.getSessionFactory().openSession();
         Transaction transaction = null;
-        List<thietbi> thietbiList = new ArrayList<>();
         boolean success = false;
         try {
             transaction = session.beginTransaction();
-            
-            
-            // Sử dụng HQL để thực hiện truy vấn
-            String hql = "FROM thietbi WHERE matb = :keyword AND matb IN "
-                    + "(SELECT matb FROM thongtinsd WHERE TGTra IS NOT NULL OR "
-                    + "TGTra <> '0000-00-00 00:00:00')";
-            Query query = session.createQuery(hql);
-            query.setParameter("keyword", "%" + keyword + "%"); // Sử dụng tham số để tránh SQL Injection
 
-            thietbiList = query.list();
+            // Tìm các mã thiết bị cần xóa dựa trên từ khóa
+            String hqlSelect = "SELECT tb.MaTB FROM thietbi tb WHERE CAST(tb.MaTB AS string) LIKE :keyword "
+                    + "AND (tb.MaTB NOT IN (SELECT ttsd.MaTB FROM thongtinsd ttsd WHERE "
+                    + "ttsd.MaTB = tb.MaTB AND (ttsd.TGTra IS NULL OR ttsd.TGTra = '0000-00-00 00:00:00')) "
+                    + "OR NOT EXISTS (SELECT 1 FROM thongtinsd ttsd WHERE ttsd.MaTB = tb.MaTB))";
+            Query querySelect = session.createQuery(hqlSelect);
+            querySelect.setParameter("keyword", maQuyDinh + "%");
+            List<String> maTBList = querySelect.list();
 
-            for(thietbi tb : thietbiList) {
-                System.out.println("Device Code: " + tb.getMaTB());
-            }
-            
-            
-            
-//            thietbi tb = session.get(thietbi.class, maTb);
-//            session.delete(tb);
+            // Tạo câu lệnh SQL DELETE
+            String sqlDelete = "DELETE FROM ThietBi WHERE MaTB IN (:maTBList)";
+            Query queryDelete = session.createSQLQuery(sqlDelete);
+            queryDelete.setParameterList("maTBList", maTBList);
+            int rowCount = queryDelete.executeUpdate();
+
             transaction.commit();
-            
+            success = true;
         } catch (Exception ex) {
-            session.getTransaction().rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
             ex.printStackTrace();
-            success = false;
+        } finally {
+            session.close();
         }
         return success;
     }
-
     
     public List<thietbi> searchThietBiByIDDAL(int maTb){
         int keyword = maTb; // Chuỗi bạn nhập vào

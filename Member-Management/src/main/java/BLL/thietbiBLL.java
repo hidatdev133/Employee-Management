@@ -47,8 +47,8 @@ public class thietbiBLL {
         return tbDAL.deleteThietbi(maTb); // Gọi phương thức thêm thiết bị từ DAL
     }
     
-    public boolean deleteThietbiByPrefix(int soNhap){
-        return tbDAL.deleteThietbiByPrefix(soNhap);
+    public boolean deleteThietbiByMaQuyDinh(int maQuyDinh){
+        return tbDAL.deleteThietbiByMaQuyDinh(maQuyDinh);
     }
 
     public boolean isSuccess() {
