@@ -9,7 +9,6 @@ import lombok.Data;
 
 @Entity
 public class thietbi {
-
     @Id
     private int MaTB;
     @Column
@@ -50,8 +49,7 @@ public class thietbi {
         this.MoTaTB = MoTaTB;
     }
     
-    
-    @OneToMany(mappedBy = "thietbi", cascade = CascadeType.ALL)
-    private List<thongtinsd> listttsd;
+    @OneToMany(mappedBy = "tb", cascade = CascadeType.ALL)
+    private List<thongtinsd> listTtsd;
     
 }

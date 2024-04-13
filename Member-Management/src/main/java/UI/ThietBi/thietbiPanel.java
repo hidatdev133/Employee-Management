@@ -460,7 +460,6 @@ public class thietbiPanel extends javax.swing.JPanel {
                 System.out.println("hello");
                 throw new AssertionError();
         }
-        
     }//GEN-LAST:event_btnXoaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

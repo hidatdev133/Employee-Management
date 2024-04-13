@@ -84,7 +84,7 @@ public class thongtinsd {
     }
 
     @ManyToOne
-    @JoinColumn(name = "MaTB")
+    @JoinColumn(name = "MaTB", insertable = false, updatable = false)
     private thietbi tb;
 
 }
