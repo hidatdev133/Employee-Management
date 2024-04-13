@@ -7,11 +7,31 @@ package UI.ThanhVien;
 import BLL.ThanhVienBLL;
 import DAL.ThanhVien.ThanhVienDAL;
 import DAL.ThanhVien.thanhvien;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.apache.commons.codec.binary.StringUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.util.StringUtil;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -52,7 +72,7 @@ public class thanhvienPanel extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
-        btnImport = new javax.swing.JButton();
+        btnImportExcel = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtKhoa = new javax.swing.JTextField();
         txtPass = new javax.swing.JTextField();
@@ -123,7 +143,12 @@ public class thanhvienPanel extends javax.swing.JPanel {
             }
         });
 
-        btnImport.setText("Import Excel");
+        btnImportExcel.setText("Import Excel");
+        btnImportExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImportExcelActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Password:");
 
@@ -157,7 +182,7 @@ public class thanhvienPanel extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnDelete)
                             .addGap(29, 29, 29)
-                            .addComponent(btnImport)
+                            .addComponent(btnImportExcel)
                             .addGap(618, 618, 618))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +268,7 @@ public class thanhvienPanel extends javax.swing.JPanel {
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnImport, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnImportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -301,13 +326,36 @@ public class thanhvienPanel extends javax.swing.JPanel {
         }
         
         thanhvien tv = new thanhvien(matv, hoten, khoa, nganh, Integer.parseInt(sdt), password, email);
-        thanhVienBLL.updateThanhVien(tv);
-        JOptionPane.showMessageDialog(this, "Sửa thông tin của thành viên thành công");
-        fillTableThanhVien();
+        boolean success = thanhVienBLL.updateThanhVien(tv);
+        
+        int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa thông tin của thành viên này không?", "Confirmation", JOptionPane.YES_NO_OPTION);
+        
+        if (success && check == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, "Đã sửa dữ liệu thành công!");
+            fillTableThanhVien();
+        } else {
+            JOptionPane.showMessageDialog(this, "Sửa dữ liệu thất bại!");
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = tbThanhVien.getSelectedRow();
+        if (selectedRow != -1) { 
+            int id = Integer.parseInt(tbThanhVien.getValueAt(selectedRow, 0).toString());
+            thanhvien tv = thanhVienBLL.getThanhVien(id);
+            boolean success = thanhVienBLL.deleteThanhVien(tv);
+            
+            int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa thành viên này không?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+            if (success && check == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(this, "Đã xóa dữ liệu thành công!");
+                fillTableThanhVien(); 
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa dữ liệu thất bại!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng cần xóa");
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     public static boolean isEmailValid(String email) {
@@ -329,11 +377,12 @@ public class thanhvienPanel extends javax.swing.JPanel {
             return;
         }
         int matv;
-        
+        int sDT;
         try {
             matv = Integer.parseInt(maTV);
+            sDT = Integer.parseInt(sdt);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chỉ nhập số cho trường mã thành viên");
+            JOptionPane.showMessageDialog(this, "Vui lòng chỉ nhập số cho trường mã thành viên và số điện thoại");
             return;
         }
         
@@ -348,10 +397,15 @@ public class thanhvienPanel extends javax.swing.JPanel {
             return;
         }
         
-        thanhvien tv = new thanhvien(matv, hoten, khoa, nganh, Integer.parseInt(sdt), password, email);
-        thanhVienBLL.addThanhVien(tv);
-        JOptionPane.showMessageDialog(this, "Thêm 1 thành viên mới thành công");
-        fillTableThanhVien();
+        thanhvien tv = new thanhvien(matv, hoten, khoa, nganh, sDT, password, email);
+        boolean success = thanhVienBLL.addThanhVien(tv);
+        
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Đã thêm dữ liệu thành công!");
+            fillTableThanhVien();
+        } else {
+            JOptionPane.showMessageDialog(this, "Thêm dữ liệu thất bại!");
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void tbThanhVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbThanhVienMouseClicked
@@ -362,17 +416,98 @@ public class thanhvienPanel extends javax.swing.JPanel {
             txtKhoa.setText(model.getValueAt(row, 2).toString());
             txtNganh.setText(model.getValueAt(row, 3).toString());
             txtSDT.setText(model.getValueAt(row, 4).toString());
-            txtEmail.setText(model.getValueAt(row, 5).toString());
-            txtPass.setText(model.getValueAt(row, 6).toString());
+            txtPass.setText(model.getValueAt(row, 5).toString());
+            txtEmail.setText(model.getValueAt(row, 6).toString());
         }
     }//GEN-LAST:event_tbThanhVienMouseClicked
+
+    public List<thanhvien> readDataFromExcel(BufferedInputStream bis) throws IOException {
+        List<thanhvien> tvList = new ArrayList<>();
+        XSSFWorkbook wb = new XSSFWorkbook(bis);
+        Sheet sheet = wb.getSheetAt(0);
+        DataFormatter formatter = new DataFormatter();
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            Row row = sheet.getRow(i);
+            if (row == null) {
+                continue;
+            }
+            
+            Cell matvCell = row.getCell(0);
+            Cell hotenCell = row.getCell(1);
+            Cell khoaCell = row.getCell(2);
+            Cell nganhCell = row.getCell(3);
+            Cell sdtCell = row.getCell(4);
+            Cell passwordCell = row.getCell(5);
+            Cell emailCell = row.getCell(6);
+            
+            String matv = formatter.formatCellValue(matvCell);
+            String sdt = formatter.formatCellValue(sdtCell);
+            
+            int maTV, sDT;
+            try {
+                maTV = Integer.parseInt(matv);
+                sDT = Integer.parseInt(sdt);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Vui lòng chỉ nhập số cho cột mã thành viên và số điện thoại");
+                continue;
+            }
+            
+            String email = emailCell.getStringCellValue();
+            if(!isEmailValid(email)) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập email hợp lệ cho cột email");
+                continue;
+            }
+            
+            String hoten = hotenCell.getStringCellValue();
+            String khoa = khoaCell.getStringCellValue();
+            String nganh = nganhCell.getStringCellValue();
+            String password = formatter.formatCellValue(passwordCell);
+            
+            thanhvien tv = new thanhvien(maTV, hoten, khoa, nganh, sDT ,password, email);
+            tvList.add(tv);
+        }
+        wb.close();
+        return tvList;
+    }
+    
+    private void btnImportExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportExcelActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel files", "xls", "xlsx");
+        chooser.addChoosableFileFilter(filter);
+        
+        int result = chooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+            try {
+                FileInputStream excelFIS = new FileInputStream(file);
+                BufferedInputStream excelBIS = new BufferedInputStream(excelFIS);
+                List<thanhvien> tvList = readDataFromExcel(excelBIS);   
+                if (!tvList.isEmpty()) {
+                    for (thanhvien tv : tvList) {
+                        if (thanhVienDAL.isMaTVExisted(tv.getMaTV())) {
+                            JOptionPane.showMessageDialog(this, tv.getMaTV() + " mã này đã tồn tại");
+                            continue;
+                        }
+                        thanhVienBLL.addThanhVien(tv);
+                    }
+                    JOptionPane.showMessageDialog(this, "Đã nhập dữ liệu từ file excel thành công!");
+                    fillTableThanhVien();
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(thanhvienPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(thanhvienPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } 
+    }//GEN-LAST:event_btnImportExcelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnImport;
+    private javax.swing.JButton btnImportExcel;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -1,5 +1,6 @@
 package UI.Menu;
 
+import UI.ThanhVien.thanhvienPanel;
 import UI.ThietBi.thietbiPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -8,7 +9,8 @@ import javax.swing.JLabel;
 public class menuForm extends javax.swing.JFrame {
 
     thietbiPanel tb = new thietbiPanel();
-
+    thanhvienPanel tv = new thanhvienPanel();
+    
     public menuForm() {
         initComponents();
 
@@ -286,7 +288,18 @@ public class menuForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThanhvienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhvienActionPerformed
-        // TODO add your handling code here:
+        // xóa tất cả những giao diện hiển thị trong jpanel4
+        jPanel4.removeAll();
+
+        jPanel4.add(tv);
+
+        jPanel4.revalidate(); // Revalidate to reflect the changes
+        jPanel4.repaint();    // Repaint to refresh the display
+        btnThietbi.setBackground(new Color(255, 255, 255));
+        btnHomePage.setBackground(new Color(255, 255, 255));
+        btnThanhvien.setBackground(new Color(225, 219, 219));
+        btnThongtin.setBackground(new Color(255, 255, 255));
+        btnXuPhat.setBackground(new Color(255, 255, 255));
     }//GEN-LAST:event_btnThanhvienActionPerformed
 
     private void btnXuPhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuPhatActionPerformed
