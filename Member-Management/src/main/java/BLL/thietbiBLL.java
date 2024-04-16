@@ -43,12 +43,12 @@ public class thietbiBLL {
         }
     }
 
-    public boolean deleteThietbi(int maTb) {
-        return tbDAL.deleteThietbi(maTb); // Gọi phương thức thêm thiết bị từ DAL
+    public boolean deleteThietBiByIDBLL(int maTb) {
+        return tbDAL.deleteThietBiByIDDAL(maTb); // Gọi phương thức thêm thiết bị từ DAL
     }
     
-    public boolean deleteThietbiByMaQuyDinh(int maQuyDinh){
-        return tbDAL.deleteThietbiByMaQuyDinh(maQuyDinh);
+    public boolean deleteThietBiByMaQuyDinhBLL(int maQuyDinh){
+        return tbDAL.deleteThietBiByMaQuyDinhDAL(maQuyDinh);
     }
 
     public boolean isSuccess() {
@@ -64,4 +64,6 @@ public class thietbiBLL {
     public List<thietbi> searchThietBiByDescriptionBLL(String mota){
         return tbDAL.searchThietBiByDescriptionDAL(mota);
     }
+    
+    
 }

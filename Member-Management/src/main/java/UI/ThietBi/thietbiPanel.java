@@ -428,11 +428,12 @@ public class thietbiPanel extends javax.swing.JPanel {
                     String tenTB = txtTentb.getText();
                     String moTaTB = txtMota.getText();
 
-                    if (tbBLL.deleteThietbi(maTB)) {
+                    if (tbBLL.deleteThietBiByIDBLL(maTB)) {
                         loadThietbi();
                         System.out.println("ma: " + tbBLL.isMaTbExisted(maTB));
-                        System.out.println("ma: " + tbBLL.deleteThietbi(maTB));
+                        System.out.println("ma: " + tbBLL.deleteThietBiByIDBLL(maTB));
                         JOptionPane.showMessageDialog(this, "Đã xóa thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        loadThietbi();
                     }else{
                         JOptionPane.showMessageDialog(this, "Xóa thiết bị không thành công", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                     }
@@ -448,8 +449,9 @@ public class thietbiPanel extends javax.swing.JPanel {
                     try {
                         int maquydinh = Integer.parseInt(search);
                         System.out.println("maquydinh: " + search);
-                        if(tbBLL.deleteThietbiByMaQuyDinh(maquydinh)){
+                        if(tbBLL.deleteThietBiByMaQuyDinhBLL(maquydinh)){
                             JOptionPane.showMessageDialog(this, "Đã xóa những thiết bị theo mã quy định thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                            loadThietbi();
                         }else{
                             JOptionPane.showMessageDialog(this, "Xóa thiết bị không thành công", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                         }

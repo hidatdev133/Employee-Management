@@ -70,7 +70,7 @@ public class thietbiDAL {
         }
     }
 
-    public boolean deleteThietbi(int maTb) {
+    public boolean deleteThietBiByIDDAL(int maTb) {
         session = HibernateUtils.getSessionFactory().openSession();
         Transaction transaction = null;
         boolean success = false;
@@ -87,9 +87,9 @@ public class thietbiDAL {
             List<String> maTBexist = querySelect.list();
 
             // Tạo câu lệnh SQL DELETE
-            String sqlDelete = "DELETE FROM ThietBi WHERE MaTB IN (:maTBList)";
+            String sqlDelete = "DELETE FROM thietbi WHERE MaTB IN (:maTBexist)";
             Query queryDelete = session.createSQLQuery(sqlDelete);
-            queryDelete.setParameterList("maTBList", maTBexist);
+            queryDelete.setParameterList("maTBexist", maTBexist);
             int rowCount = queryDelete.executeUpdate();
             
             if(rowCount > 0){
@@ -111,7 +111,7 @@ public class thietbiDAL {
         return success;
     }
     
-    public boolean deleteThietbiByMaQuyDinh(int maQuyDinh) {
+    public boolean deleteThietBiByMaQuyDinhDAL(int maQuyDinh) {
         session = HibernateUtils.getSessionFactory().openSession();
         Transaction transaction = null;
         boolean success = false;
@@ -128,7 +128,7 @@ public class thietbiDAL {
             List<String> maTBList = querySelect.list();
 
             // Tạo câu lệnh SQL DELETE
-            String sqlDelete = "DELETE FROM ThietBi WHERE MaTB IN (:maTBList)";
+            String sqlDelete = "DELETE FROM thietbi WHERE MaTB IN (:maTBList)";
             Query queryDelete = session.createSQLQuery(sqlDelete);
             queryDelete.setParameterList("maTBList", maTBList);
             int rowCount = queryDelete.executeUpdate();
@@ -223,7 +223,7 @@ public class thietbiDAL {
             // Sử dụng HQL để thực hiện truy vấn
             String hql = "from thietbi where motatb like :keyword";
             Query query = session.createQuery(hql);
-            query.setParameter("keyword", "%" + keyword + "%"); // Sử dụng tham số để tránh SQL Injection
+            query.setParameter("keyword", "%" + keyword + "%");
 
             thietbiList = query.list();
 
@@ -240,4 +240,6 @@ public class thietbiDAL {
         }
         return thietbiList;
     }
+    
+    
 }
