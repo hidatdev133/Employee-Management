@@ -20,6 +20,7 @@
         <property name="show_sql">true</property>
         <mapping class="DAL.ThietBi.thietbi" /> 
         <mapping class="DAL.ThongTinSuDung.thongtinsd" /> 
+        <mapping class="DAL.ThanhVien.thanhvien"/>
        
     </session-factory>
 </hibernate-configuration>
