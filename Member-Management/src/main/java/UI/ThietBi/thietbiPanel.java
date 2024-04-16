@@ -317,23 +317,21 @@ public class thietbiPanel extends javax.swing.JPanel {
         int selectedRow = jtQLTB.getSelectedRow();
         if (selectedRow != -1) {
             int maTB = Integer.parseInt(txtMatb.getText());
-            String tenTB = txtTentb.getText();
-            String moTaTB = txtMota.getText();
+            String tenTB = txtTentb.getText().trim();
+            String moTaTB = txtMota.getText().trim();
 
             if (tenTB.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập tên thiết bị", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            try (Session session = HibernateUtils.getSessionFactory().openSession()) {
-                session.beginTransaction();
+            thietbi tb = new thietbi(maTB, tenTB, moTaTB);
 
-                thietbi existingTB = session.get(thietbi.class, maTB);
-                if (existingTB != null) {
-                    existingTB.setTenTB(tenTB);
-                    existingTB.setMoTaTB(moTaTB);
-                    session.update(existingTB);
-                    session.getTransaction().commit();
+            thietbiDAL tbDAL = new thietbiDAL();
+
+            try {
+                tbDAL.updateThietbi(tb);
+                if (tbDAL.isMaTbExisted(maTB)) {
                     JOptionPane.showMessageDialog(this, "Đã sửa thông tin thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 
                     // Reload data after updating
@@ -341,6 +339,8 @@ public class thietbiPanel extends javax.swing.JPanel {
                 } else {
                     JOptionPane.showMessageDialog(this, "Không tìm thấy thiết bị có mã: " + maTB, "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                 }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số nguyên cho mã thiết bị", "Lỗi", JOptionPane.ERROR_MESSAGE);
             } catch (HibernateException ex) {
                 JOptionPane.showMessageDialog(this, "Lỗi khi thực hiện cập nhật: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
