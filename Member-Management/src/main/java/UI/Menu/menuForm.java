@@ -1,5 +1,8 @@
 package UI.Menu;
 
+import DAL.ThanhVien.ThanhVienDAL;
+import DAL.ThietBi.thietbiDAL;
+import DAL.XuLy.XuLyDAL;
 import UI.ThanhVien.thanhvienPanel;
 import UI.ThietBi.thietbiPanel;
 import UI.XuLy.xulyPanel;
@@ -9,18 +12,30 @@ import javax.swing.JLabel;
 
 public class menuForm extends javax.swing.JFrame {
 
-    thietbiPanel tb = new thietbiPanel();
-
-    xulyPanel xl = new xulyPanel();
-
-
-    thanhvienPanel tv = new thanhvienPanel();
-    
+    private thietbiPanel tb = new thietbiPanel();
+    private xulyPanel xl = new xulyPanel();
+    private thanhvienPanel tv = new thanhvienPanel();
+    private ThanhVienDAL tvDAL;
+    private thietbiDAL tbDAL;
+    private XuLyDAL xlDAL;
     public menuForm() {
         initComponents();
-
         jPanel4.setLayout(new BorderLayout());
+        updateCounts();
+    }
 
+    private void updateCounts() {
+        tvDAL = new ThanhVienDAL();
+        tbDAL = new thietbiDAL();
+        xlDAL = new XuLyDAL();
+        int thanhVienCount = tvDAL.getTotalCount();
+        int thietBiCount = tbDAL.getTotalCount();
+        int xulyCount = xlDAL.getTotalCount();
+
+        // Update JLabels with counts
+        thanhvien.setText(Integer.toString(thanhVienCount));
+        thietbi.setText(Integer.toString(thietBiCount));
+        xuphat.setText(Integer.toString(xulyCount));
     }
 
     @SuppressWarnings("unchecked")
@@ -42,8 +57,11 @@ public class menuForm extends javax.swing.JFrame {
         JLabelxuphat = new javax.swing.JLabel();
         canvas1 = new java.awt.Canvas();
         jPanel6 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        thanhvien = new javax.swing.JLabel();
+        jPanelthietbi = new javax.swing.JPanel();
+        thietbi = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        xuphat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,45 +170,69 @@ public class menuForm extends javax.swing.JFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(255, 153, 0)));
         jPanel6.setPreferredSize(new java.awt.Dimension(200, 165));
 
+        thanhvien.setText("countthanhvien");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(84, Short.MAX_VALUE)
+                .addComponent(thanhvien, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(thanhvien)
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(225, 219, 219));
-        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(255, 153, 0)));
-        jPanel2.setPreferredSize(new java.awt.Dimension(200, 165));
+        jPanelthietbi.setBackground(new java.awt.Color(225, 219, 219));
+        jPanelthietbi.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(255, 153, 0)));
+        jPanelthietbi.setPreferredSize(new java.awt.Dimension(200, 165));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+        thietbi.setText("countthietbi");
+
+        javax.swing.GroupLayout jPanelthietbiLayout = new javax.swing.GroupLayout(jPanelthietbi);
+        jPanelthietbi.setLayout(jPanelthietbiLayout);
+        jPanelthietbiLayout.setHorizontalGroup(
+            jPanelthietbiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelthietbiLayout.createSequentialGroup()
+                .addContainerGap(83, Short.MAX_VALUE)
+                .addComponent(thietbi, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+        jPanelthietbiLayout.setVerticalGroup(
+            jPanelthietbiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelthietbiLayout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(thietbi)
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(225, 219, 219));
         jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(255, 153, 0)));
         jPanel3.setPreferredSize(new java.awt.Dimension(200, 165));
 
+        xuphat.setText("countxuphat");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(xuphat, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(xuphat)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -208,7 +250,7 @@ public class menuForm extends javax.swing.JFrame {
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelthietbi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelthietbi))
                 .addGap(66, 66, 66)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +269,7 @@ public class menuForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelthietbi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(106, 106, 106)
                 .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -395,11 +437,14 @@ public class menuForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelthanhvien;
     private javax.swing.JLabel jLabelthietbi;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanelthietbi;
+    private javax.swing.JLabel thanhvien;
+    private javax.swing.JLabel thietbi;
+    private javax.swing.JLabel xuphat;
     // End of variables declaration//GEN-END:variables
 
 }

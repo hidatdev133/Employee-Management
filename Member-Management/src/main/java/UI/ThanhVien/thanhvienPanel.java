@@ -102,6 +102,7 @@ public class thanhvienPanel extends javax.swing.JPanel {
                 "Mã thành viên", "Họ Tên", "Khoa", "Ngành", "SĐT", "Password", "Email"
             }
         ));
+        tbThanhVien.setRowHeight(30);
         tbThanhVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbThanhVienMouseClicked(evt);

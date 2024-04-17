@@ -3,6 +3,7 @@ package UI.ThietBi;
 import BLL.thietbiBLL;
 import DAL.HibernateUtils;
 import DAL.ThietBi.thietbi;
+import DAL.ThietBi.thietbiDAL;
 import UI.ThietBi.themThietBiForm;
 import java.io.File;
 import java.util.*;

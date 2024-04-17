@@ -25,16 +25,16 @@ public class ThanhVienBLL {
         return thanhVienDAL.getThanhVien(MaTV);
     }
 
-    public void addThanhVien(thanhvien tv) {
-        thanhVienDAL.addThanhVien(tv);
-    }
-
-    public void updateThanhVien(thanhvien tv) {
-        thanhVienDAL.updateThanhVien(tv);
-    }
-
-    public void deleteThanhVien(thanhvien tv) {
-        thanhVienDAL.deleteThanhVien(tv);
+//    public void addThanhVien(thanhvien tv) {
+//        thanhVienDAL.addThanhVien(tv);
+//    }
+//
+//    public void updateThanhVien(thanhvien tv) {
+//        thanhVienDAL.updateThanhVien(tv);
+//    }
+//
+//    public void deleteThanhVien(thanhvien tv) {
+//        thanhVienDAL.deleteThanhVien(tv);
 
     
     public boolean addThanhVien(thanhvien tv) {

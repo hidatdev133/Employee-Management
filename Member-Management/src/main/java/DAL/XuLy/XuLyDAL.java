@@ -18,7 +18,12 @@ public class XuLyDAL {
     public XuLyDAL() {
         session = HibernateUtils.getSessionFactory().openSession();
     }
-
+    
+    public int getTotalCount() {
+        List<xuly> xulyList = loadXuLy(); 
+        return xulyList.size();
+    }
+    
     public List loadXuLy() {
         List<xuly> xl = null;
         try {

@@ -14,7 +14,12 @@ public class ThanhVienDAL {
     public ThanhVienDAL() {
         session = HibernateUtils.getSessionFactory().openSession();
     }
-
+    
+    public int getTotalCount() {
+        List<thanhvien> thanhVienList = getAllThanhVien(); // Assuming loadThanhVien() returns the list of all members
+        return thanhVienList.size();
+    }
+    
     public List<thanhvien> getAllThanhVien() {
         List<thanhvien> list = new ArrayList<>();
         try {
@@ -54,21 +59,21 @@ public class ThanhVienDAL {
     }
 
 
-    public void addThanhVien(thanhvien tv) {
-        session.beginTransaction();
-        session.save(tv);
-        session.getTransaction().commit();
-        session.clear();
-    }
-
-    public void updateThanhVien(thanhvien tv) {
-        session.beginTransaction();
-        session.saveOrUpdate(tv);
-        session.getTransaction().commit();
-    }
-
-    public void deleteThanhVien(thanhvien tv) {
-        session.delete(tv);
+//    public void addThanhVien(thanhvien tv) {
+//        session.beginTransaction();
+//        session.save(tv);
+//        session.getTransaction().commit();
+//        session.clear();
+//    }
+//
+//    public void updateThanhVien(thanhvien tv) {
+//        session.beginTransaction();
+//        session.saveOrUpdate(tv);
+//        session.getTransaction().commit();
+//    }
+//
+//    public void deleteThanhVien(thanhvien tv) {
+//        session.delete(tv);
 
     
     public boolean addThanhVien(thanhvien tv) {

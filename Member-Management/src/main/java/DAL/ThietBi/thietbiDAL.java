@@ -16,7 +16,12 @@ public class thietbiDAL {
     public thietbiDAL() {
         session = HibernateUtils.getSessionFactory().openSession();
     }
-
+    
+     public int getTotalCount() {
+        List<thietbi> thietBiList = loadThietbi();
+        return thietBiList.size();
+    }
+    
     public List loadThietbi() {
         session = HibernateUtils.getSessionFactory().openSession();
         Transaction transaction = null;
