@@ -351,16 +351,16 @@ public class thietbiPanel extends javax.swing.JPanel {
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        String searchQuery = txtSearch.getText().trim();
+        String search = txtSearch.getText().trim();
         String selectedOption = cbbTimKiem.getSelectedItem().toString();
         
-        if(!searchQuery.isEmpty()){
+        if(!search.isEmpty()){
             List<thietbi> searchResult = null;
             
             switch (selectedOption) {
                 case "Mã thiết bị":
                     try {
-                        int matb = Integer.parseInt(searchQuery);
+                        int matb = Integer.parseInt(search);
                         searchResult = tbBLL.searchThietBiByIDBLL(matb);
                     } catch (NumberFormatException e) {
                         JOptionPane.showMessageDialog(this, "Invalid grade format");
@@ -368,10 +368,10 @@ public class thietbiPanel extends javax.swing.JPanel {
                     
                     break;
                 case "Tên thiết bị":
-                    searchResult = tbBLL.searchThietBiByNameBLL(searchQuery);
+                    searchResult = tbBLL.searchThietBiByNameBLL(search);
                     break;
                 case "Mô tả thiết bị":
-                    searchResult = tbBLL.searchThietBiByDescriptionBLL(searchQuery);
+                    searchResult = tbBLL.searchThietBiByDescriptionBLL(search);
                     break;
                 default:
                     JOptionPane.showMessageDialog(this, "Invalid search option");
