@@ -65,5 +65,4 @@ public class thietbiBLL {
         return tbDAL.searchThietBiByDescriptionDAL(mota);
     }
     
-    
 }

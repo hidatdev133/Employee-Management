@@ -103,6 +103,11 @@ public class thietbiPanel extends javax.swing.JPanel {
         jLabel4.setText("QUẢN LÝ THIẾT BỊ");
 
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -315,53 +320,53 @@ public class thietbiPanel extends javax.swing.JPanel {
 
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        int selectedRow = jtQLTB.getSelectedRow();
-        if (selectedRow != -1) {
-            int maTB = Integer.parseInt(txtMatb.getText());
-            String tenTB = txtTentb.getText().trim();
-            String moTaTB = txtMota.getText().trim();
+         int selectedRow = jtQLTB.getSelectedRow();
+    if (selectedRow != -1) {
+        int maTB = Integer.parseInt(txtMatb.getText());
+        String tenTB = txtTentb.getText().trim();
+        String moTaTB = txtMota.getText().trim();
 
-            if (tenTB.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên thiết bị", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            thietbi tb = new thietbi(maTB, tenTB, moTaTB);
-
-            thietbiDAL tbDAL = new thietbiDAL();
-
-            try {
-                tbDAL.updateThietbi(tb);
-                if (tbDAL.isMaTbExisted(maTB)) {
-                    JOptionPane.showMessageDialog(this, "Đã sửa thông tin thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-
-                    // Reload data after updating
-                    loadThietbi();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Không tìm thấy thiết bị có mã: " + maTB, "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                }
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập số nguyên cho mã thiết bị", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            } catch (HibernateException ex) {
-                JOptionPane.showMessageDialog(this, "Lỗi khi thực hiện cập nhật: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một thiết bị để sửa", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+        if (tenTB.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên thiết bị", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            return;
         }
+
+        thietbi tb = new thietbi(maTB, tenTB, moTaTB);
+
+        thietbiDAL tbDAL = new thietbiDAL();
+
+        try {
+            tbDAL.updateThietbi(tb);
+            if (tbDAL.isMaTbExisted(maTB)) {
+                JOptionPane.showMessageDialog(this, "Đã sửa thông tin thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+                // Reload data after updating
+                loadThietbi();
+            } else {
+                JOptionPane.showMessageDialog(this, "Không tìm thấy thiết bị có mã: " + maTB, "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số nguyên cho mã thiết bị", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } catch (HibernateException ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi khi thực hiện cập nhật: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn một thiết bị để sửa", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+    }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
-        String searchQuery = txtSearch.getText().trim();
+        String search = txtSearch.getText().trim();
         String selectedOption = cbbTimKiem.getSelectedItem().toString();
         
-        if(!searchQuery.isEmpty()){
+        if(!search.isEmpty()){
             List<thietbi> searchResult = null;
             
             switch (selectedOption) {
                 case "Mã thiết bị":
                     try {
-                        int matb = Integer.parseInt(searchQuery);
+                        int matb = Integer.parseInt(search);
                         searchResult = tbBLL.searchThietBiByIDBLL(matb);
                     } catch (NumberFormatException e) {
                         JOptionPane.showMessageDialog(this, "Invalid grade format");
@@ -369,10 +374,10 @@ public class thietbiPanel extends javax.swing.JPanel {
                     
                     break;
                 case "Tên thiết bị":
-                    searchResult = tbBLL.searchThietBiByNameBLL(searchQuery);
+                    searchResult = tbBLL.searchThietBiByNameBLL(search);
                     break;
                 case "Mô tả thiết bị":
-                    searchResult = tbBLL.searchThietBiByDescriptionBLL(searchQuery);
+                    searchResult = tbBLL.searchThietBiByDescriptionBLL(search);
                     break;
                 default:
                     JOptionPane.showMessageDialog(this, "Invalid search option");

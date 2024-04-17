@@ -21,6 +21,7 @@
         <mapping class="DAL.ThietBi.thietbi" /> 
         <mapping class="DAL.ThongTinSuDung.thongtinsd" /> 
         <mapping class="DAL.ThanhVien.thanhvien"/>
+        <mapping class="DAL.XuLy.xuly"/>
        
     </session-factory>
 </hibernate-configuration>
