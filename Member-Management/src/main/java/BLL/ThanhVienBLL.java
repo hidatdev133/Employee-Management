@@ -35,6 +35,18 @@ public class ThanhVienBLL {
 
     public void deleteThanhVien(thanhvien tv) {
         thanhVienDAL.deleteThanhVien(tv);
+
+    
+    public boolean addThanhVien(thanhvien tv) {
+        return thanhVienDAL.addThanhVien(tv);
+    }
+    
+    public boolean updateThanhVien(thanhvien tv) {
+        return thanhVienDAL.updateThanhVien(tv);
+    }
+    
+    public boolean deleteThanhVien(thanhvien tv) {
+        return thanhVienDAL.deleteThanhVien(tv);
     }
 
     public String getHoTenbyMaTV(int MaTV) {
