@@ -28,7 +28,11 @@ public class ThongKePanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/user.png"))); // NOI18N
         jButton1.setText("Thành viên");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -36,21 +40,40 @@ public class ThongKePanel extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/device.png"))); // NOI18N
+        jButton2.setText("Thiết bị được mượn");
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/device.png"))); // NOI18N
+        jButton3.setText("Thiết bị đang mượn");
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/condemn.png"))); // NOI18N
+        jButton4.setText("Vi phạm");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(83, 83, 83)
                 .addComponent(jButton1)
-                .addContainerGap(856, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(jButton2)
+                .addGap(76, 76, 76)
+                .addComponent(jButton3)
+                .addGap(66, 66, 66)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jButton1)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton3)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -65,7 +88,7 @@ public class ThongKePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 423, Short.MAX_VALUE))
+                .addGap(0, 437, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -76,6 +99,9 @@ public class ThongKePanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
