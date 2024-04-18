@@ -320,59 +320,57 @@ public class thietbiPanel extends javax.swing.JPanel {
 
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-         int selectedRow = jtQLTB.getSelectedRow();
-    if (selectedRow != -1) {
-        int maTB = Integer.parseInt(txtMatb.getText());
-        String tenTB = txtTentb.getText().trim();
-        String moTaTB = txtMota.getText().trim();
+        int selectedRow = jtQLTB.getSelectedRow();
+        if (selectedRow != -1) {
+            int maTB = Integer.parseInt(txtMatb.getText());
+            String tenTB = txtTentb.getText().trim();
+            String moTaTB = txtMota.getText().trim();
 
-        if (tenTB.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên thiết bị", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        thietbi tb = new thietbi(maTB, tenTB, moTaTB);
-
-        thietbiDAL tbDAL = new thietbiDAL();
-
-        try {
-            tbDAL.updateThietbi(tb);
-            if (tbDAL.isMaTbExisted(maTB)) {
-                JOptionPane.showMessageDialog(this, "Đã sửa thông tin thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-
-                // Reload data after updating
-                loadThietbi();
-            } else {
-                JOptionPane.showMessageDialog(this, "Không tìm thấy thiết bị có mã: " + maTB, "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+            if (tenTB.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên thiết bị", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                return;
             }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập số nguyên cho mã thiết bị", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        } catch (HibernateException ex) {
-            JOptionPane.showMessageDialog(this, "Lỗi khi thực hiện cập nhật: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+
+            thietbi tb = new thietbi(maTB, tenTB, moTaTB);
+
+            try {
+                tbBLL.updateThietbi(tb);
+                if (tbBLL.isMaTbExisted(maTB)) {
+                    JOptionPane.showMessageDialog(this, "Đã sửa thông tin thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+
+                    // Reload data after updating
+                    loadThietbi();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Không tìm thấy thiết bị có mã: " + maTB, "Cảnh báo", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số nguyên cho mã thiết bị", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } catch (HibernateException ex) {
+                JOptionPane.showMessageDialog(this, "Lỗi khi thực hiện cập nhật: " + ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một thiết bị để sửa", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Vui lòng chọn một thiết bị để sửa", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-    }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         // TODO add your handling code here:
         String search = txtSearch.getText().trim();
         String selectedOption = cbbTimKiem.getSelectedItem().toString();
-        
-        if(!search.isEmpty()){
+
+        if (!search.isEmpty()) {
             List<thietbi> searchResult = null;
-            
+
             switch (selectedOption) {
                 case "Mã thiết bị":
                     try {
-                        int matb = Integer.parseInt(search);
-                        searchResult = tbBLL.searchThietBiByIDBLL(matb);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Invalid grade format");
-                    }
-                    
-                    break;
+                    int matb = Integer.parseInt(search);
+                    searchResult = tbBLL.searchThietBiByIDBLL(matb);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Invalid grade format");
+                }
+
+                break;
                 case "Tên thiết bị":
                     searchResult = tbBLL.searchThietBiByNameBLL(search);
                     break;
@@ -392,28 +390,28 @@ public class thietbiPanel extends javax.swing.JPanel {
                     model.addRow(row);
                 }
             }
-        }else {
+        } else {
             // Nếu trường tìm kiếm trống, hiển thị tất cả 
             loadThietbi();
         }
-        
+
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void cbbXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbXoaActionPerformed
         // TODO add your handling code here:
         String selectedOption = cbbXoa.getSelectedItem().toString();
-        
-        if (selectedOption == "Xóa 1 thiết bị" || selectedOption == "Xóa theo mã quy định"){
+
+        if (selectedOption == "Xóa 1 thiết bị" || selectedOption == "Xóa theo mã quy định") {
             txtMatb.setText("");
             txtTentb.setText("");
             txtMota.setText("");
             txtSearch.setText("");
-            
+
             txtMatb.setEnabled(false);
             txtTentb.setEnabled(false);
             txtMota.setEnabled(false);
             loadThietbi();
-        }else{
+        } else {
             txtMatb.setEnabled(true);
             txtTentb.setEnabled(true);
             txtMota.setEnabled(true);
@@ -424,9 +422,9 @@ public class thietbiPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 //        String searchQuery = txtSearch.getText().trim();
         String selectedOption = cbbXoa.getSelectedItem().toString();
-        
+
         int selectedRow = jtQLTB.getSelectedRow();
-        
+
         switch (selectedOption) {
             case "Xóa 1 thiết bị":
                 if (selectedRow != -1) {
@@ -440,7 +438,7 @@ public class thietbiPanel extends javax.swing.JPanel {
                         System.out.println("ma: " + tbBLL.deleteThietBiByIDBLL(maTB));
                         JOptionPane.showMessageDialog(this, "Đã xóa thiết bị thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                         loadThietbi();
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(this, "Xóa thiết bị không thành công", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                     }
                 } else {
@@ -449,16 +447,16 @@ public class thietbiPanel extends javax.swing.JPanel {
                 break;
             case "Xóa theo mã quy định":
                 String search = txtSearch.getText().trim();
-                if(search.isEmpty()){
+                if (search.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Nhập mã quy định vào ô tìm kiếm", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
-                }else{
+                } else {
                     try {
                         int maquydinh = Integer.parseInt(search);
                         System.out.println("maquydinh: " + search);
-                        if(tbBLL.deleteThietBiByMaQuyDinhBLL(maquydinh)){
+                        if (tbBLL.deleteThietBiByMaQuyDinhBLL(maquydinh)) {
                             JOptionPane.showMessageDialog(this, "Đã xóa những thiết bị theo mã quy định thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                             loadThietbi();
-                        }else{
+                        } else {
                             JOptionPane.showMessageDialog(this, "Xóa thiết bị không thành công", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
                         }
                     } catch (NumberFormatException e) {
