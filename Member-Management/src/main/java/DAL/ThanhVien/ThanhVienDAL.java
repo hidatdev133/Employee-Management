@@ -57,24 +57,6 @@ public class ThanhVienDAL {
         thanhvien tv = session.get(thanhvien.class, MaTV);
         return tv;
     }
-
-
-//    public void addThanhVien(thanhvien tv) {
-//        session.beginTransaction();
-//        session.save(tv);
-//        session.getTransaction().commit();
-//        session.clear();
-//    }
-//
-//    public void updateThanhVien(thanhvien tv) {
-//        session.beginTransaction();
-//        session.saveOrUpdate(tv);
-//        session.getTransaction().commit();
-//    }
-//
-//    public void deleteThanhVien(thanhvien tv) {
-//        session.delete(tv);
-
     
     public boolean addThanhVien(thanhvien tv) {
         try {
