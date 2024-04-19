@@ -4,7 +4,7 @@
  */
 package UI.MainMenu;
 
-import UI.KhuVucHocTap.nhapMaForm;
+import UI.KhuVucHocTap.nhapMaTVForm;
 import UI.Menu.menuForm;
 
 /**
@@ -14,7 +14,7 @@ import UI.Menu.menuForm;
 public class mainMenuPanel extends javax.swing.JFrame {
 
     menuForm mForm = new menuForm();
-    nhapMaForm nhapForm = new nhapMaForm();
+    nhapMaTVForm nhapForm = new nhapMaTVForm();
     
     public mainMenuPanel() {
         initComponents();
@@ -66,7 +66,7 @@ public class mainMenuPanel extends javax.swing.JFrame {
                 .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnKvht, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();

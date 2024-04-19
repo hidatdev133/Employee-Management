@@ -1,6 +1,7 @@
 package DAL.ThongTinSuDung;
 
 import DAL.ThietBi.thietbi;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -17,16 +18,16 @@ public class thongtinsd {
     @Column
     private int MaTB;
     @Column
-    private Date TGVao;
+    private LocalDateTime TGVao;
     @Column
-    private Date TGMuon;
+    private LocalDateTime TGMuon;
     @Column
-    private Date TGTra;
+    private LocalDateTime TGTra;
 
     public thongtinsd() {
     }
 
-    public thongtinsd(int MaTT, int MaTV, int MaTB, Date TGVao, Date TGMuon, Date TGTra) {
+    public thongtinsd(int MaTT, int MaTV, int MaTB, LocalDateTime TGVao, LocalDateTime TGMuon, LocalDateTime TGTra) {
         this.MaTT = MaTT;
         this.MaTV = MaTV;
         this.MaTB = MaTB;
@@ -59,27 +60,27 @@ public class thongtinsd {
         this.MaTB = MaTB;
     }
 
-    public Date getTGVao() {
+    public LocalDateTime getTGVao() {
         return TGVao;
     }
 
-    public void setTGVao(Date TGVao) {
+    public void setTGVao(LocalDateTime TGVao) {
         this.TGVao = TGVao;
     }
 
-    public Date getTGMuon() {
+    public LocalDateTime getTGMuon() {
         return TGMuon;
     }
 
-    public void setTGMuon(Date TGMuon) {
+    public void setTGMuon(LocalDateTime TGMuon) {
         this.TGMuon = TGMuon;
     }
 
-    public Date getTGTra() {
+    public LocalDateTime getTGTra() {
         return TGTra;
     }
 
-    public void setTGTra(Date TGTra) {
+    public void setTGTra(LocalDateTime TGTra) {
         this.TGTra = TGTra;
     }
 
