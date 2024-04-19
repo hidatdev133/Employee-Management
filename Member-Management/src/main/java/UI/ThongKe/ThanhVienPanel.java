@@ -392,6 +392,7 @@ public class ThanhVienPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbMember.setRowHeight(30);
         jScrollPane1.setViewportView(tbMember);
 
         javax.swing.GroupLayout panelChartLayout = new javax.swing.GroupLayout(panelChart);

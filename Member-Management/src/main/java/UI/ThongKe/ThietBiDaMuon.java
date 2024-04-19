@@ -47,6 +47,7 @@ public class ThietBiDaMuon extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbAvailableDevice.setRowHeight(30);
         jScrollPane1.setViewportView(tbAvailableDevice);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

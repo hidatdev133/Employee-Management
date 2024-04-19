@@ -47,7 +47,6 @@ public class menuForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnHomePage = new javax.swing.JButton();
         btnThietbi = new javax.swing.JButton();
-        btnThongTin = new javax.swing.JButton();
         btnXuPhat = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -72,7 +71,7 @@ public class menuForm extends javax.swing.JFrame {
 
         btnHomePage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnHomePage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/home.png"))); // NOI18N
-        btnHomePage.setText("Trang tổng quan");
+        btnHomePage.setText("Trang tổng quan ");
         btnHomePage.setBorder(null);
         btnHomePage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,19 +89,6 @@ public class menuForm extends javax.swing.JFrame {
         btnThietbi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThietbiActionPerformed(evt);
-            }
-        });
-
-        btnThongTin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnThongTin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/info.png"))); // NOI18N
-        btnThongTin.setText(" Thông tin sử dụng");
-        btnThongTin.setBorder(null);
-        btnThongTin.setMaximumSize(new java.awt.Dimension(119, 38));
-        btnThongTin.setMinimumSize(new java.awt.Dimension(119, 38));
-        btnThongTin.setPreferredSize(new java.awt.Dimension(119, 38));
-        btnThongTin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThongTinActionPerformed(evt);
             }
         });
 
@@ -153,7 +139,7 @@ public class menuForm extends javax.swing.JFrame {
 
         btnThanhvien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnThanhvien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/user.png"))); // NOI18N
-        btnThanhvien.setText("Thành viên         ");
+        btnThanhvien.setText("Thành viên           ");
         btnThanhvien.setBorder(null);
         btnThanhvien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,7 +267,7 @@ public class menuForm extends javax.swing.JFrame {
 
         btnThongKe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/statistic.png"))); // NOI18N
-        btnThongKe.setText("    Thống kê");
+        btnThongKe.setText("Thống kê                 ");
         btnThongKe.setBorder(null);
         btnThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,7 +289,6 @@ public class menuForm extends javax.swing.JFrame {
                             .addComponent(btnThanhvien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnThietbi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnXuPhat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnThongTin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,17 +304,15 @@ public class menuForm extends javax.swing.JFrame {
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(36, 36, 36)
                         .addComponent(btnThanhvien, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(36, 36, 36)
                         .addComponent(btnThietbi, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(btnThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(36, 36, 36)
                         .addComponent(btnXuPhat, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(36, 36, 36)
                         .addComponent(btnThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 48, Short.MAX_VALUE)))
+                        .addGap(0, 44, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -364,9 +347,9 @@ public class menuForm extends javax.swing.JFrame {
         btnThietbi.setBackground(new Color(255, 255, 255));
         btnHomePage.setBackground(new Color(255, 255, 255));
         btnThanhvien.setBackground(new Color(225, 219, 219));
-        btnThongTin.setBackground(new Color(255, 255, 255));
+        
         btnXuPhat.setBackground(new Color(255, 255, 255));
-        btnThongTin.setBackground(new Color(255, 255, 255));
+       
         btnThongKe.setBackground(new Color(255, 255, 255));
     }//GEN-LAST:event_btnThanhvienActionPerformed
 
@@ -381,25 +364,9 @@ public class menuForm extends javax.swing.JFrame {
         btnXuPhat.setBackground(new Color(225, 219, 219));
         btnHomePage.setBackground(new Color(255, 255, 255));
         btnThanhvien.setBackground(new Color(255, 255, 255));
-        btnThongTin.setBackground(new Color(255, 255, 255));
         btnThietbi.setBackground(new Color(255, 255, 255));
         btnThongKe.setBackground(new Color(255, 255, 255));
     }//GEN-LAST:event_btnXuPhatActionPerformed
-
-    private void btnThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongTinActionPerformed
-        jPanel4.removeAll();
-
-       // jPanel4.add();
-
-        jPanel4.revalidate(); // Revalidate to reflect the changes
-        jPanel4.repaint();    // Repaint to refresh the display
-        btnXuPhat.setBackground(new Color(255,255,255 ));
-        btnHomePage.setBackground(new Color(255, 255, 255));
-        btnThanhvien.setBackground(new Color(255, 255, 255));
-        btnThongTin.setBackground(new Color(225, 219, 219));
-        btnThietbi.setBackground(new Color(255, 255, 255));
-        btnThongKe.setBackground(new Color(255, 255, 255));
-    }//GEN-LAST:event_btnThongTinActionPerformed
 
     private void btnThietbiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThietbiActionPerformed
         // xóa tất cả những giao diện hiển thị trong jpanel4
@@ -412,7 +379,7 @@ public class menuForm extends javax.swing.JFrame {
         btnThietbi.setBackground(new Color(225, 219, 219));
         btnHomePage.setBackground(new Color(255, 255, 255));
         btnThanhvien.setBackground(new Color(255, 255, 255));
-        btnThongTin.setBackground(new Color(255, 255, 255));
+     
         btnXuPhat.setBackground(new Color(255, 255, 255));
         btnThongKe.setBackground(new Color(255, 255, 255));
     }//GEN-LAST:event_btnThietbiActionPerformed
@@ -443,7 +410,6 @@ public class menuForm extends javax.swing.JFrame {
         btnHomePage.setBackground(new Color(225, 219, 219));
         btnThanhvien.setBackground(new Color(255, 255, 255));
         btnThietbi.setBackground(new Color(255, 255, 255));
-        btnThongTin.setBackground(new Color(255, 255, 255));
         btnXuPhat.setBackground(new Color(255, 255, 255));
         btnThongKe.setBackground(new Color(255, 255, 255));
     }//GEN-LAST:event_btnHomePageActionPerformed
@@ -461,7 +427,6 @@ public class menuForm extends javax.swing.JFrame {
         btnThanhvien.setBackground(new Color(255, 255, 255));
         btnThongKe.setBackground(new Color(225, 219, 219));
         btnThietbi.setBackground(new Color(255, 255, 255));
-        btnThongTin.setBackground(new Color(255, 255, 255));
         
     }//GEN-LAST:event_btnThongKeActionPerformed
 
@@ -482,7 +447,6 @@ public class menuForm extends javax.swing.JFrame {
     private javax.swing.JButton btnThanhvien;
     private javax.swing.JButton btnThietbi;
     private javax.swing.JButton btnThongKe;
-    private javax.swing.JButton btnThongTin;
     private javax.swing.JButton btnXuPhat;
     private java.awt.Canvas canvas1;
     private javax.swing.JLabel jLabel7;
