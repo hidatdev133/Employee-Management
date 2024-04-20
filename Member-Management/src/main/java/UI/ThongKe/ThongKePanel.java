@@ -15,6 +15,8 @@ public class ThongKePanel extends javax.swing.JPanel {
     
     private ThanhVienPanel tvPanel = new ThanhVienPanel();
     private ThietBiDaMuon tbPanel = new ThietBiDaMuon();
+    viphamPanel vpPanel=new viphamPanel();
+    thietBiDangMuon tbdm=new thietBiDangMuon();
     /**
      * Creates new form ThongKePanel
      */
@@ -60,9 +62,19 @@ public class ThongKePanel extends javax.swing.JPanel {
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/device.png"))); // NOI18N
         jButton3.setText("Thiết bị đang mượn");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/condemn.png"))); // NOI18N
         jButton4.setText("Vi phạm");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -144,6 +156,27 @@ public class ThongKePanel extends javax.swing.JPanel {
         btnBorrowed.setBackground(new Color(225, 219, 219));
         btnMember.setBackground(new Color(255,255,255));
     }//GEN-LAST:event_btnBorrowedActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+          jPanel2.removeAll();
+        jPanel2.add(tbdm);
+        jPanel2.revalidate(); // Revalidate to reflect the changes
+        jPanel2.repaint();    // Repaint to refresh the display
+         jButton4.setBackground(new Color(255,255,255));
+         btnMember.setBackground(new Color(255,255,255));
+         jButton3.setBackground(new Color(225,219,219));
+       
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        jPanel2.removeAll();
+        jPanel2.add(vpPanel);
+        jPanel2.revalidate(); // Revalidate to reflect the changes
+        jPanel2.repaint();    // Repaint to refresh the display
+         jButton4.setBackground(new Color(225, 219, 219));
+         btnMember.setBackground(new Color(255,255,255));
+         jButton3.setBackground(new Color(255,255,255));
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
