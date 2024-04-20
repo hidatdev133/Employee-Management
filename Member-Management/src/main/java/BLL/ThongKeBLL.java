@@ -77,4 +77,48 @@ public class ThongKeBLL {
     public int getTotalThietBi(){
         return tkDAL.getTotalCount();
     }
+  
+            public List getTotalDaXL(){
+        return tkDAL.getListXuLyDaXuLy();
+    }
+  public List getTotalChuaXL(){
+      return tkDAL.getListChuaXuLy();
+  }
+  public thanhvien getTV(int ma){
+      return tkDAL.getThanhVien(ma);
+  }
+  public List getXL(){
+      return tkDAL.getXuLy();
+              }
+  public int getTongTien(){
+      List <xuly>list=tkDAL.getListXuLyDaXuLy();
+      int tong=0;
+      for(xuly xl:list){
+          if(xl.getSoTien()!=null){
+              tong+=xl.getSoTien();
+          }
+      }
+      return tong;
+  }
+  public List getthietbidangmuon(){
+      return tkDAL.getThietBiDangMuon();
+  }
+   public thietbi getthietbi(int ma){
+       return tkDAL.getthietbi(ma);
+   }
+   public long  getAmountCXL(String hinhthuc){
+       return tkDAL.getAmountChuaXL(hinhthuc);
+   }
+   public long  getAmountXL(String hinhthuc){
+       return tkDAL.getAmountViPham(hinhthuc);
+   }
+   public List getHinhThuc(){
+       return tkDAL.getHinhThuc();
+   }
+   public List getThietBiThoiGian(String from, String to){
+       return tkDAL.getThietBiTheoThoiGian(from, to);
+   }
+   public int getTongTB(){
+       return tkDAL.getTB().size();
+   }
 }
