@@ -14,6 +14,7 @@ import java.awt.Color;
 public class ThongKePanel extends javax.swing.JPanel {
     
     private ThanhVienPanel tvPanel = new ThanhVienPanel();
+    private ThietBiDaMuon tbPanel = new ThietBiDaMuon();
     /**
      * Creates new form ThongKePanel
      */
@@ -34,7 +35,7 @@ public class ThongKePanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         btnMember = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnBorrowed = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -49,8 +50,13 @@ public class ThongKePanel extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/device.png"))); // NOI18N
-        jButton2.setText("Thiết bị được mượn");
+        btnBorrowed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/device.png"))); // NOI18N
+        btnBorrowed.setText("Thiết bị được mượn");
+        btnBorrowed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrowedActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/device.png"))); // NOI18N
         jButton3.setText("Thiết bị đang mượn");
@@ -66,7 +72,7 @@ public class ThongKePanel extends javax.swing.JPanel {
                 .addGap(83, 83, 83)
                 .addComponent(btnMember)
                 .addGap(64, 64, 64)
-                .addComponent(jButton2)
+                .addComponent(btnBorrowed)
                 .addGap(76, 76, 76)
                 .addComponent(jButton3)
                 .addGap(66, 66, 66)
@@ -80,7 +86,7 @@ public class ThongKePanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton3)
-                    .addComponent(jButton2)
+                    .addComponent(btnBorrowed)
                     .addComponent(btnMember))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -125,12 +131,24 @@ public class ThongKePanel extends javax.swing.JPanel {
         jPanel2.revalidate(); // Revalidate to reflect the changes
         jPanel2.repaint();    // Repaint to refresh the display
          btnMember.setBackground(new Color(225, 219, 219));
+         btnBorrowed.setBackground(new Color(255,255,255));
+         
     }//GEN-LAST:event_btnMemberActionPerformed
+
+    private void btnBorrowedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrowedActionPerformed
+        // TODO add your handling code here:
+        jPanel2.removeAll();
+        jPanel2.add(tbPanel);
+        jPanel2.revalidate(); // Revalidate to reflect the changes
+        jPanel2.repaint();    // Repaint to refresh the display
+        btnBorrowed.setBackground(new Color(225, 219, 219));
+        btnMember.setBackground(new Color(255,255,255));
+    }//GEN-LAST:event_btnBorrowedActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBorrowed;
     private javax.swing.JButton btnMember;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
