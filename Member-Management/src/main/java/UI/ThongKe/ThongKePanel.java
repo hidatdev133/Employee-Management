@@ -38,8 +38,8 @@ public class ThongKePanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         btnMember = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnThietBiDangMuon = new javax.swing.JButton();
+        btnViPham = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -55,19 +55,19 @@ public class ThongKePanel extends javax.swing.JPanel {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/device.png"))); // NOI18N
         jButton2.setText("Thiết bị được mượn");
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/device.png"))); // NOI18N
-        jButton3.setText("Thiết bị đang mượn");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnThietBiDangMuon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/device.png"))); // NOI18N
+        btnThietBiDangMuon.setText("Thiết bị đang mượn");
+        btnThietBiDangMuon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnThietBiDangMuonActionPerformed(evt);
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/condemn.png"))); // NOI18N
-        jButton4.setText("Vi phạm");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnViPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/icon/condemn.png"))); // NOI18N
+        btnViPham.setText("Vi phạm");
+        btnViPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnViPhamActionPerformed(evt);
             }
         });
 
@@ -81,9 +81,9 @@ public class ThongKePanel extends javax.swing.JPanel {
                 .addGap(64, 64, 64)
                 .addComponent(jButton2)
                 .addGap(76, 76, 76)
-                .addComponent(jButton3)
+                .addComponent(btnThietBiDangMuon)
                 .addGap(66, 66, 66)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnViPham, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(70, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -91,8 +91,8 @@ public class ThongKePanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
+                    .addComponent(btnViPham)
+                    .addComponent(btnThietBiDangMuon)
                     .addComponent(jButton2)
                     .addComponent(btnMember))
                 .addContainerGap(21, Short.MAX_VALUE))
@@ -138,39 +138,37 @@ public class ThongKePanel extends javax.swing.JPanel {
         jPanel2.revalidate(); // Revalidate to reflect the changes
         jPanel2.repaint();    // Repaint to refresh the display
          btnMember.setBackground(new Color(225, 219, 219));
-         jButton4.setBackground(new Color(255,255,255));
-          jButton3.setBackground(new Color(255,255,255));
-          jButton2.setBackground(new Color(255,255,255));jButton2.setBackground(new Color(255,255,255));
+     
     }//GEN-LAST:event_btnMemberActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnViPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViPhamActionPerformed
        jPanel2.removeAll();
         jPanel2.add(vpPanel);
         jPanel2.revalidate(); // Revalidate to reflect the changes
         jPanel2.repaint();    // Repaint to refresh the display
-         jButton4.setBackground(new Color(225, 219, 219));
+         btnViPham.setBackground(new Color(225, 219, 219));
          btnMember.setBackground(new Color(255,255,255));
-         jButton3.setBackground(new Color(255,255,255));
-         jButton2.setBackground(new Color(255,255,255));
-    }//GEN-LAST:event_jButton4ActionPerformed
+         btnThietBiDangMuon.setBackground(new Color(255,255,255));
+       
+    }//GEN-LAST:event_btnViPhamActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnThietBiDangMuonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThietBiDangMuonActionPerformed
         jPanel2.removeAll();
         jPanel2.add(tbdm);
         jPanel2.revalidate(); // Revalidate to reflect the changes
         jPanel2.repaint();    // Repaint to refresh the display
-         jButton4.setBackground(new Color(255,255,255));
+         btnViPham.setBackground(new Color(255,255,255));
          btnMember.setBackground(new Color(255,255,255));
-         jButton3.setBackground(new Color(225,219,219));
-         jButton2.setBackground(new Color(255,255,255));
-    }//GEN-LAST:event_jButton3ActionPerformed
+         btnThietBiDangMuon.setBackground(new Color(225,219,219));
+       
+    }//GEN-LAST:event_btnThietBiDangMuonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMember;
+    private javax.swing.JButton btnThietBiDangMuon;
+    private javax.swing.JButton btnViPham;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
