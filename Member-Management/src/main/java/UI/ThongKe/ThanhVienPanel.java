@@ -132,8 +132,8 @@ public class ThanhVienPanel extends javax.swing.JPanel {
         modelTbMember.addColumn("Tên thành viên");
 
         String from = new SimpleDateFormat("yyyy-MM-dd").format( fromDate.getDate());
-        
-       String to = new SimpleDateFormat("yyyy-MM-dd").format( toDate.getDate());
+        String to = new SimpleDateFormat("yyyy-MM-dd").format( toDate.getDate());
+       
         List list = tkBLL.getTimeMember(from, to);
         for(int i = 0 ; i< list.size() ; i++ ){
             thongtinsd tt = (thongtinsd) list.get(i);
@@ -224,7 +224,10 @@ public class ThanhVienPanel extends javax.swing.JPanel {
     }
      public  void createPieChart(){
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("one", 1);
+        int viPham = tkBLL.getListPunish().size();
+        dataset.setValue("Vi phạm", viPham);
+        int all = tkBLL.getAllThanhVien().size();
+        dataset.setValue("Còn lại", all - viPham);
         JFreeChart chart=ChartFactory.createPieChart("Thống kê thành viên", dataset, true, true, true);
         ChartPanel pieChart = new ChartPanel(chart);
         panelChart.setLayout(new BorderLayout());
@@ -254,6 +257,7 @@ public class ThanhVienPanel extends javax.swing.JPanel {
         toDate = new com.toedter.calendar.JDateChooser();
         fromDate = new com.toedter.calendar.JDateChooser();
         btnSeach = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbMember = new javax.swing.JTable();
         panelChart = new javax.swing.JPanel();
@@ -309,6 +313,15 @@ public class ThanhVienPanel extends javax.swing.JPanel {
             }
         });
 
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jTextField1.setText("-");
+        jTextField1.setBorder(null);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelTimeLayout = new javax.swing.GroupLayout(panelTime);
         panelTime.setLayout(panelTimeLayout);
         panelTimeLayout.setHorizontalGroup(
@@ -316,9 +329,11 @@ public class ThanhVienPanel extends javax.swing.JPanel {
             .addGroup(panelTimeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fromDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
                 .addComponent(toDate, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(btnSeach)
@@ -332,8 +347,9 @@ public class ThanhVienPanel extends javax.swing.JPanel {
                     .addComponent(btnSeach)
                     .addComponent(fromDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(toDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(11, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelSearchLayout = new javax.swing.GroupLayout(panelSearch);
@@ -399,7 +415,7 @@ public class ThanhVienPanel extends javax.swing.JPanel {
         panelChart.setLayout(panelChartLayout);
         panelChartLayout.setHorizontalGroup(
             panelChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 333, Short.MAX_VALUE)
+            .addGap(0, 335, Short.MAX_VALUE)
         );
         panelChartLayout.setVerticalGroup(
             panelChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -433,7 +449,7 @@ public class ThanhVienPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -484,6 +500,10 @@ public class ThanhVienPanel extends javax.swing.JPanel {
         if(modelCbbDepartment.getSelectedItem() != null)
             loadTableMember();
     }//GEN-LAST:event_cbbDepartmentActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
     private DefaultComboBoxModel modelCbbDepartment ;
     private DefaultComboBoxModel modelCbbMember ;
     private DefaultTableCellRenderer renderer;
@@ -498,6 +518,7 @@ public class ThanhVienPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelSearch;
     private javax.swing.JPanel panelChart;
     private javax.swing.JPanel panelKhoa;

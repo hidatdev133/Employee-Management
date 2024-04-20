@@ -5,6 +5,7 @@
 package BLL;
 
 import DAL.ThanhVien.thanhvien;
+import DAL.ThietBi.thietbi;
 import DAL.ThongKe.ThongKeDAL;
 import DAL.ThongTinSuDung.thongtinsd;
 import DAL.XuLy.xuly;
@@ -25,15 +26,6 @@ public class ThongKeBLL {
         return list;
     }
     
-    public List<thongtinsd> getBorrowingMember() {
-        List<thongtinsd> list = tkDAL.getBorrowingMember();
-    return list;
-    }
-
-    public List<xuly> getPunishedMember() {
-        List<xuly> list = tkDAL.getPunishedMember();
-    return list;
-    }
         
     public List<thongtinsd> getTimeMember(String from , String to) {
         List<thongtinsd> list = tkDAL.getTimeMember(from, to);
@@ -62,5 +54,27 @@ public class ThongKeBLL {
      public List<thanhvien> getListNganh() {
         List<thanhvien> list = tkDAL.getListMajor();
         return list;
+    }
+     
+    public List<thongtinsd> getListBorrowed(String from , String to){
+        List<thongtinsd> list = tkDAL.getListBorrowed(from, to);
+        return list ;
+    }
+    
+    public thietbi getThietBi(int maTB){
+        thietbi tb = tkDAL.getThietBi(maTB);
+        return tb;
+    }
+    
+    public List<thongtinsd> getTopBorrowed(){
+        return tkDAL.getTopBorrowed();
+    }
+    
+    public List<xuly> getListPunish(){
+        return tkDAL.getListPunish();
+    }
+    
+    public int getTotalThietBi(){
+        return tkDAL.getTotalCount();
     }
 }
