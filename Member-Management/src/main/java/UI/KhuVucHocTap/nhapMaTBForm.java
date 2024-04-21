@@ -102,7 +102,14 @@ public class nhapMaTBForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        int matb = Integer.parseInt(txtMaTB.getText());
+        String maTB = txtMaTB.getText();
+        int matb;
+        try {
+            matb = Integer.parseInt(maTB);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chỉ nhập số cho mã thiết bị");
+            return;
+        }
         if (type == 1) {
             thietbiBLL tbBLL = new thietbiBLL();
             

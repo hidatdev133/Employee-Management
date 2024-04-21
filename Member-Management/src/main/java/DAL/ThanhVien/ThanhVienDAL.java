@@ -120,4 +120,44 @@ public class ThanhVienDAL {
         }
         return hoten;
     }
+    
+    public List<thanhvien> searchThanhVien(String keyword, int condition) {
+        List<thanhvien> tvList = new ArrayList<>();
+        try {
+            session.beginTransaction();
+            String hql = "";
+            switch (condition) {
+                case 1:
+                    hql = "from thanhvien where CAST(MaTV AS string) like :keyword";
+                    break;
+                case 2:
+                    hql = "from thanhvien where HoTen like :keyword";
+                    break;
+                case 3:
+                    hql = "from thanhvien where Khoa like :keyword";
+                    break;
+                case 4:
+                    hql = "from thanhvien where Nganh like :keyword";
+                    break;
+                case 5:
+                    hql = "from thanhvien where CAST(SDT AS string) like :keyword";
+                    break;
+                case 6:
+                    hql = "from thanhvien where Email like :keyword";
+                    break;
+                default:
+                    break;
+            }
+            
+            Query query = session.createQuery(hql);
+            query.setParameter("keyword", "%" + keyword + "%");
+            tvList = query.list();
+
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
+            ex.printStackTrace();
+        }
+        return tvList;
+    }
 }
