@@ -24,18 +24,6 @@ public class ThanhVienBLL {
     public thanhvien getThanhVien(int MaTV) {
         return thanhVienDAL.getThanhVien(MaTV);
     }
-
-//    public void addThanhVien(thanhvien tv) {
-//        thanhVienDAL.addThanhVien(tv);
-//    }
-//
-//    public void updateThanhVien(thanhvien tv) {
-//        thanhVienDAL.updateThanhVien(tv);
-//    }
-//
-//    public void deleteThanhVien(thanhvien tv) {
-//        thanhVienDAL.deleteThanhVien(tv);
-
     
     public boolean addThanhVien(thanhvien tv) {
         return thanhVienDAL.addThanhVien(tv);
@@ -51,5 +39,9 @@ public class ThanhVienBLL {
 
     public String getHoTenbyMaTV(int MaTV) {
         return thanhVienDAL.getHotenByMaTV(MaTV);
+    }
+    
+    public List<thanhvien> searchThanhVien(String keyword, int condition) {
+        return thanhVienDAL.searchThanhVien(keyword, condition);
     }
 }

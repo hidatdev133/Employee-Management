@@ -2,9 +2,11 @@ package UI.KhuVucHocTap;
 
 import BLL.ThanhVienBLL;
 import BLL.ThongTinSuDungBLL;
+import BLL.XuLyBLL;
 import DAL.ThanhVien.ThanhVienDAL;
 import DAL.ThanhVien.thanhvien;
 import DAL.ThongTinSuDung.thongtinsd;
+import DAL.XuLy.XuLyDAL;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 
@@ -108,16 +110,25 @@ public class nhapMaTVForm extends javax.swing.JFrame {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         int id = Integer.parseInt(txtMaTV.getText());
         thanhvien tv = thanhVienBLL.getThanhVien(id);
-        if (tv != null) {
-            thongtinForm ttForm = new thongtinForm(tv);
-            int matt = ttsdBLL.getmaxMaTT();
-            ttsdBLL.addThongTinVao(new thongtinsd(matt, tv.getMaTV(), 0, LocalDateTime.now(), null, null));
-            this.dispose();
-            ttForm.setVisible(true);
-            ttForm.setLocationRelativeTo(this);
-       } else {
+        XuLyDAL xldal = new XuLyDAL();
+        
+        if(tv == null) {
             JOptionPane.showMessageDialog(this, "Không phải là thành viên");
+            return;
         }
+        
+        if (xldal.matvExistsInXulyWithTrangthaixl0(id)) {
+            JOptionPane.showMessageDialog(this, "Bạn đang bị xử lý vi phạm không thể mượn thiết bị");
+            return;
+        }
+        
+        khuVucHocTapForm kvhtForm = new khuVucHocTapForm(tv);
+        int matt = ttsdBLL.getmaxMaTT();
+        ttsdBLL.addThongTinVao(new thongtinsd(matt, tv.getMaTV(), 0, LocalDateTime.now(), null, null));
+        this.dispose();
+        kvhtForm.setVisible(true);
+        kvhtForm.setLocationRelativeTo(this);
+       
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
