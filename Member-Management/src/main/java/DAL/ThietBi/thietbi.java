@@ -14,15 +14,15 @@ public class thietbi {
     @Column
     private String TenTB;
     @Column
-    private String MoTaTB;
+    private String mo_tatb;
 
     public thietbi() {
     }
 
-    public thietbi(int MaTB, String TenTB, String MoTaTB) {
+    public thietbi(int MaTB, String TenTB, String mo_tatb) {
         this.MaTB = MaTB;
         this.TenTB = TenTB;
-        this.MoTaTB = MoTaTB;
+        mo_tatb = mo_tatb;
     }
 
     public int getMaTB() {
@@ -41,12 +41,20 @@ public class thietbi {
         this.TenTB = TenTB;
     }
 
-    public String getMoTaTB() {
-        return MoTaTB;
+    public String getMo_tatb() {
+        return mo_tatb;
     }
 
-    public void setMoTaTB(String MoTaTB) {
-        this.MoTaTB = MoTaTB;
+    public void setMo_tatb(String mo_tatb) {
+        this.mo_tatb = mo_tatb;
+    }
+
+    public List<thongtinsd> getListTtsd() {
+        return listTtsd;
+    }
+
+    public void setListTtsd(List<thongtinsd> listTtsd) {
+        this.listTtsd = listTtsd;
     }
     
     @OneToMany(mappedBy = "tb", cascade = CascadeType.ALL)

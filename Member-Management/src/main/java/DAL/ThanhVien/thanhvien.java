@@ -15,7 +15,7 @@ public class thanhvien {
     private int MaTV;
 
     @Column
-    private String HoTen;
+    private String ho_ten;
 
     @Column
     private String Khoa;
@@ -27,7 +27,7 @@ public class thanhvien {
     private int SDT;
 
     @Column
-    private String Password;
+    private String pass_word;
 
     @Column
     private String Email;
@@ -35,13 +35,13 @@ public class thanhvien {
     public thanhvien() {
     }
 
-    public thanhvien(int MaTV, String HoTen, String Khoa, String Nganh, int SDT, String Password, String Email) {
+    public thanhvien(int MaTV, String ho_ten, String Khoa, String Nganh, int SDT, String pass_word, String Email) {
         this.MaTV = MaTV;
-        this.HoTen = HoTen;
+        this.ho_ten = ho_ten;
         this.Khoa = Khoa;
         this.Nganh = Nganh;
         this.SDT = SDT;
-        this.Password = Password;
+        this.pass_word = pass_word;
         this.Email = Email;
     }
 
