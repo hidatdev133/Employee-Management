@@ -120,7 +120,7 @@ public class nhapMaTBForm extends javax.swing.JFrame {
             
             if (ttsdbll.isThietBiDangDcMuon(matb)) {
                 JOptionPane.showMessageDialog(this, "Thiết bị này đang được mượn, vui lòng nhập mã thiết bị khác");
-                return;
+                return; 
             }
             
             LocalDateTime time = LocalDateTime.now();

@@ -46,7 +46,7 @@ public class thietbiPanel extends javax.swing.JPanel {
 
         // Iterate through the thietbiList and add each thietbi object to the table
         for (thietbi tb : thietbiList) {
-            Object[] row = {tb.getMaTB(), tb.getTenTB(), tb.getMoTaTB()};
+            Object[] row = {tb.getMaTB(), tb.getTenTB(), tb.getMo_tatb()};
             model.addRow(row);
         }
     }
@@ -386,7 +386,7 @@ public class thietbiPanel extends javax.swing.JPanel {
                 model.setRowCount(0);
                 // Hiển thị kết quả tìm kiếm trên bảng
                 for (thietbi tb : searchResult) {
-                    Object[] row = {tb.getMaTB(), tb.getTenTB(), tb.getMoTaTB()};
+                    Object[] row = {tb.getMaTB(), tb.getTenTB(), tb.getMo_tatb()};
                     model.addRow(row);
                 }
             }

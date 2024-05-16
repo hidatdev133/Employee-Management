@@ -113,7 +113,7 @@ public class ThanhVienPanel extends javax.swing.JPanel {
             thanhvien tv = (thanhvien) list.get(i);
             int stt = i + 1;
             int maTV = tv.getMaTV();
-            String nameTV = tv.getHoTen();
+            String nameTV = tv.getHo_ten();
             Object[] ob ={stt, maTV, nameTV};
             modelTbMember.addRow(ob);
         }
@@ -140,7 +140,7 @@ public class ThanhVienPanel extends javax.swing.JPanel {
             int stt = i + 1;
             int maTV = tt.getMaTV();
             thanhvien tv = tkBLL.getThanhVien(maTV);
-            String tenTV = tv.getHoTen();
+            String tenTV = tv.getHo_ten();
             Object[] ob ={stt, maTV, tenTV};
             modelTbMember.addRow(ob);
         }
@@ -165,7 +165,7 @@ public class ThanhVienPanel extends javax.swing.JPanel {
             thanhvien tv = (thanhvien) list.get(i);
             int stt = i + 1;
             int maTV = tv.getMaTV();
-            String tenTV = tv.getHoTen();
+            String tenTV = tv.getHo_ten();
             Object[] ob ={stt, maTV, tenTV};
             modelTbMember.addRow(ob);
         }
@@ -189,7 +189,7 @@ public class ThanhVienPanel extends javax.swing.JPanel {
             thanhvien tv = (thanhvien) list.get(i);
             int stt = i + 1;
             int maTV = tv.getMaTV();
-            String tenTV = tv.getHoTen();
+            String tenTV = tv.getHo_ten();
             Object[] ob ={stt, maTV, tenTV};
             modelTbMember.addRow(ob);
         }

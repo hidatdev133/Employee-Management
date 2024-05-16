@@ -45,7 +45,7 @@ public class thietBiDangMuon extends javax.swing.JPanel {
         for(thongtinsd tt:ttList){
             stt+=1;
             model.addRow(new Object[]{stt,tt.getMaTB(),tkBLL.getthietbi(tt.getMaTB()).getTenTB(), tt.getMaTV(),
-            tkBLL.getThanhVien(tt.getMaTV()).getHoTen(),tt.getTGMuon()});
+            tkBLL.getThanhVien(tt.getMaTV()).getHo_ten(),tt.getTGMuon()});
         }
     }
       public  void createPieChart(){
@@ -84,7 +84,7 @@ public Dimension getPreferredSize() {
            stt+=1;
             model.addRow(new Object[]{stt,tt.getMaTB(),tkBLL.getthietbi(tt.getMaTB()).getTenTB(),
                 tt.getMaTV(),
-            tkBLL.getThanhVien(tt.getMaTV()).getHoTen(),tt.getTGMuon()});
+            tkBLL.getThanhVien(tt.getMaTV()).getHo_ten(),tt.getTGMuon()});
        }
        
    }

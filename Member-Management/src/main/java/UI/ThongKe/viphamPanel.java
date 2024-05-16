@@ -127,7 +127,7 @@ public void loadViPhamDaXuLy(){
      model.setRowCount(0);
     for(xuly xl:daxlList){
        String tt=xl.getTrangThaiXL()==0?"Đang Xử Lý":"Đã Xử Lý";
-        model.addRow(new Object[]{xl.getMaTV(),tkBLL.getTV(xl.getMaTV()).getHoTen()
+        model.addRow(new Object[]{xl.getMaTV(),tkBLL.getTV(xl.getMaTV()).getHo_ten()
                 ,xl.getHinhThucXL(),xl.getSoTien(),xl.getNgayXL(),tt});
     }
     sl.setText(daxlList.size()+"");
@@ -143,7 +143,7 @@ public void loadViPhamChuaXuLy(){
       model.setRowCount(0);
     for(xuly xl:chuaxlList){
          String tt=xl.getTrangThaiXL()==0?"Đang Xử Lý":"Đã Xử Lý";
-        model.addRow(new Object[]{xl.getMaTV(),tkBLL.getTV(xl.getMaTV()).getHoTen()
+        model.addRow(new Object[]{xl.getMaTV(),tkBLL.getTV(xl.getMaTV()).getHo_ten()
                 ,xl.getHinhThucXL(),xl.getSoTien(),xl.getNgayXL(),tt});
     }
      sl.setText(chuaxlList.size()+"");
@@ -159,7 +159,7 @@ public void loadTatCaViPham(){
       model.setRowCount(0);
     for(xuly xl:xulyList){
          String tt=xl.getTrangThaiXL()==0?"Đang Xử Lý":"Đã Xử Lý";
-        model.addRow(new Object[]{xl.getMaTV(),tkBLL.getTV(xl.getMaTV()).getHoTen(),
+        model.addRow(new Object[]{xl.getMaTV(),tkBLL.getTV(xl.getMaTV()).getHo_ten(),
             xl.getHinhThucXL(),xl.getSoTien(),xl.getNgayXL(),tt});
     }
      sl.setText(xulyList.size()+"");

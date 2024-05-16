@@ -26,12 +26,12 @@ public class khuVucHocTapForm extends javax.swing.JFrame {
     public khuVucHocTapForm(thanhvien tv) {
         initComponents();
         lbMaTV.setText(String.valueOf(tv.getMaTV()));
-        lbTenTV.setText(tv.getHoTen());
+        lbTenTV.setText(tv.getHo_ten());
         lbKhoa.setText(tv.getKhoa());
         lbNganh.setText(tv.getNganh());
         lbSdt.setText(String.valueOf(tv.getSDT()));
         lbEmail.setText(tv.getEmail());
-        lbPass.setText(tv.getPassword());
+        lbPass.setText(tv.getPass_word());
         Timestamp ts = new Timestamp(System.currentTimeMillis());
         lbTime.setText(String.valueOf(ts));
         matv = tv.getMaTV();

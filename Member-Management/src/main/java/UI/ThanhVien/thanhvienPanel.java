@@ -7,6 +7,7 @@ package UI.ThanhVien;
 import BLL.ThanhVienBLL;
 import DAL.ThanhVien.ThanhVienDAL;
 import DAL.ThanhVien.thanhvien;
+import UI.KhuVucHocTap.nhapMaTVForm;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,15 +46,17 @@ public class thanhvienPanel extends javax.swing.JPanel {
     private DefaultTableModel model;
     private ThanhVienBLL thanhVienBLL;
     private ThanhVienDAL thanhVienDAL;
-    
+    nhapMaTVForm nhapForm = new nhapMaTVForm();
+
     public thanhvienPanel() {
         initComponents();
-        
+
         model = (DefaultTableModel) tbThanhVien.getModel();
         thanhVienBLL = new ThanhVienBLL();
         thanhVienDAL = new ThanhVienDAL();
         fillTableThanhVien();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -82,6 +85,7 @@ public class thanhvienPanel extends javax.swing.JPanel {
         txtEmail = new javax.swing.JTextField();
         txtHoTen = new javax.swing.JTextField();
         cbSearch = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("QUẢN LÝ THÀNH VIÊN");
@@ -97,7 +101,7 @@ public class thanhvienPanel extends javax.swing.JPanel {
                 "Mã thành viên", "Họ Tên", "Khoa", "Ngành", "SĐT", "Password", "Email"
             }
         ));
-        tbThanhVien.setRowHeight(30);
+        tbThanhVien.setRowHeight(40);
         tbThanhVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbThanhVienMouseClicked(evt);
@@ -162,80 +166,81 @@ public class thanhvienPanel extends javax.swing.JPanel {
 
         cbSearch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã thành viên", "Họ tên", "Khoa", "Ngành", "SĐT", "Email" }));
 
+        jButton1.setText("Vào khu vực học tập");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(460, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(364, 364, 364))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(364, 364, 364))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(btnAdd)
-                            .addGap(28, 28, 28)
-                            .addComponent(btnEdit)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDelete)
-                            .addGap(29, 29, 29)
-                            .addComponent(btnImportExcel)
-                            .addGap(618, 618, 618))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtNganh, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtMaTV, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(44, 44, 44)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnSearch))
-                                .addComponent(jScrollPane1))
-                            .addGap(50, 50, 50)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNganh, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtMaTV, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtKhoa, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSearch))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAdd)
+                        .addGap(22, 22, 22)
+                        .addComponent(btnEdit)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnDelete)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnImportExcel)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel1)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearch)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(132, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtMaTV, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -262,28 +267,39 @@ public class thanhvienPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                            .addComponent(jLabel7))
+                        .addGap(56, 56, 56))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel1)
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSearch)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnImportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37))
+                    .addComponent(btnImportExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     public void fillTableThanhVien() {
-        model.setRowCount(0); 
+        model.setRowCount(0);
         List<thanhvien> tvList = thanhVienBLL.getAllThanhVien();
 
         for (thanhvien tv : tvList) {
-            model.addRow(new Object[]{tv.getMaTV(), tv.getHoTen(), tv.getKhoa(), tv.getNganh(), tv.getSDT(), tv.getPassword(), tv.getEmail()});
-        }        
+            model.addRow(new Object[]{tv.getMaTV(), tv.getHo_ten(), tv.getKhoa(), tv.getNganh(), tv.getSDT(), tv.getPass_word(), tv.getEmail()});
+        }
 
     }
-    
+
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
@@ -291,20 +307,20 @@ public class thanhvienPanel extends javax.swing.JPanel {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         String keyword = txtSearch.getText().trim();
         String selectedCb = cbSearch.getSelectedItem().toString();
-        
+
         if (!keyword.isEmpty()) {
             List<thanhvien> result = null;
 
             switch (selectedCb) {
                 case "Mã thành viên":
                     try {
-                        int matv = Integer.parseInt(keyword);
-                        result = thanhVienBLL.searchThanhVien(keyword, 1);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Mã thành viên không hợp lệ");
-                    }
+                    int matv = Integer.parseInt(keyword);
+                    result = thanhVienBLL.searchThanhVien(keyword, 1);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Mã thành viên không hợp lệ");
+                }
 
-                    break;
+                break;
                 case "Họ tên":
                     result = thanhVienBLL.searchThanhVien(keyword, 2);
                     break;
@@ -316,22 +332,22 @@ public class thanhvienPanel extends javax.swing.JPanel {
                     break;
                 case "SDT":
                     try {
-                        int sdt = Integer.parseInt(keyword);
-                        result = thanhVienBLL.searchThanhVien(keyword, 5);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Số điện thoại không hợp lệ");
-                    }
+                    int sdt = Integer.parseInt(keyword);
+                    result = thanhVienBLL.searchThanhVien(keyword, 5);
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Số điện thoại không hợp lệ");
+                }
                 case "Email":
                     result = thanhVienBLL.searchThanhVien(keyword, 6);
-                    break;
+                    break;  
                 default:
                     break;
             }
             if (result != null) {
                 model.setRowCount(0);
                 for (thanhvien tv : result) {
-                    model.addRow(new Object[]{tv.getMaTV(), tv.getHoTen(), tv.getKhoa(), tv.getNganh(),
-                        tv.getSDT(), tv.getPassword(), tv.getEmail()});
+                    model.addRow(new Object[]{tv.getMaTV(), tv.getHo_ten(), tv.getKhoa(), tv.getNganh(),
+                        tv.getSDT(), tv.getPass_word(), tv.getEmail()});
                 }
             }
         } else {
@@ -347,37 +363,37 @@ public class thanhvienPanel extends javax.swing.JPanel {
         String sdt = txtSDT.getText().trim();
         String password = txtPass.getText().trim();
         String email = txtEmail.getText().trim();
-        
+
         if (maTV.isEmpty() || hoten.isEmpty() || khoa.isEmpty() || nganh.isEmpty() || sdt.isEmpty() || password.isEmpty() || email.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ dữ liệu");
             return;
         }
         int matv;
-        
+
         try {
             matv = Integer.parseInt(maTV);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Vui lòng chỉ nhập số cho trường mã thành viên");
             return;
         }
-        
+
         boolean isMaTVExisted = thanhVienDAL.isMaTVExisted(matv);
         if (!isMaTVExisted) {
             JOptionPane.showMessageDialog(this, "Chưa có mã thành viên này");
             return;
         }
-        
+
         if (!isEmailValid(email)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập email hợp lệ");
             return;
         }
-        
+
         thanhvien tv = new thanhvien(matv, hoten, khoa, nganh, Integer.parseInt(sdt), password, email);
         boolean success = thanhVienBLL.updateThanhVien(tv);
-        
-        int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa thông tin của thành viên này không?", "Confirmation", 
+
+        int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa thông tin của thành viên này không?", "Confirmation",
                 JOptionPane.YES_NO_OPTION);
-        
+
         if (success && check == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, "Đã sửa dữ liệu thành công!");
             fillTableThanhVien();
@@ -388,14 +404,14 @@ public class thanhvienPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int selectedRow = tbThanhVien.getSelectedRow();
-        if (selectedRow != -1) { 
+        if (selectedRow != -1) {
             int id = Integer.parseInt(tbThanhVien.getValueAt(selectedRow, 0).toString());
             thanhvien tv = thanhVienBLL.getThanhVien(id);
             boolean success = thanhVienBLL.deleteThanhVien(tv);
-            
+
             if (success) {
                 JOptionPane.showMessageDialog(this, "Đã xóa dữ liệu thành công!");
-                fillTableThanhVien(); 
+                fillTableThanhVien();
             } else {
                 JOptionPane.showMessageDialog(this, "Xóa dữ liệu thất bại!");
             }
@@ -408,7 +424,7 @@ public class thanhvienPanel extends javax.swing.JPanel {
         final Pattern EMAIL_REGEX = Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", Pattern.CASE_INSENSITIVE);
         return EMAIL_REGEX.matcher(email).matches();
     }
-    
+
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         String maTV = txtMaTV.getText();
         String hoten = txtHoTen.getText().trim();
@@ -417,7 +433,7 @@ public class thanhvienPanel extends javax.swing.JPanel {
         String sdt = txtSDT.getText().trim();
         String password = txtPass.getText().trim();
         String email = txtEmail.getText().trim();
-        
+
         if (maTV.isEmpty() || hoten.isEmpty() || khoa.isEmpty() || nganh.isEmpty() || sdt.isEmpty() || password.isEmpty() || email.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ dữ liệu");
             return;
@@ -431,21 +447,21 @@ public class thanhvienPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Vui lòng chỉ nhập số cho trường mã thành viên và số điện thoại");
             return;
         }
-        
+
         boolean isMaTVExisted = thanhVienDAL.isMaTVExisted(matv);
         if (isMaTVExisted) {
             JOptionPane.showMessageDialog(this, "Mã thành viên này đã tồn tại vui lòng nhập lại mã khác");
             return;
         }
-        
+
         if (!isEmailValid(email)) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập email hợp lệ");
             return;
         }
-        
+
         thanhvien tv = new thanhvien(matv, hoten, khoa, nganh, sDT, password, email);
         boolean success = thanhVienBLL.addThanhVien(tv);
-        
+
         if (success) {
             JOptionPane.showMessageDialog(this, "Đã thêm dữ liệu thành công!");
             fillTableThanhVien();
@@ -477,7 +493,7 @@ public class thanhvienPanel extends javax.swing.JPanel {
             if (row == null) {
                 continue;
             }
-            
+
             Cell matvCell = row.getCell(0);
             Cell hotenCell = row.getCell(1);
             Cell khoaCell = row.getCell(2);
@@ -485,10 +501,10 @@ public class thanhvienPanel extends javax.swing.JPanel {
             Cell sdtCell = row.getCell(4);
             Cell passwordCell = row.getCell(5);
             Cell emailCell = row.getCell(6);
-            
+
             String matv = formatter.formatCellValue(matvCell);
             String sdt = formatter.formatCellValue(sdtCell);
-            
+
             int maTV, sDT;
             try {
                 maTV = Integer.parseInt(matv);
@@ -497,37 +513,37 @@ public class thanhvienPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Vui lòng chỉ nhập số cho cột mã thành viên và số điện thoại");
                 continue;
             }
-            
+
             String email = emailCell.getStringCellValue();
-            if(!isEmailValid(email)) {
+            if (!isEmailValid(email)) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập email hợp lệ cho cột email");
                 continue;
             }
-            
+
             String hoten = hotenCell.getStringCellValue();
             String khoa = khoaCell.getStringCellValue();
             String nganh = nganhCell.getStringCellValue();
             String password = formatter.formatCellValue(passwordCell);
-            
-            thanhvien tv = new thanhvien(maTV, hoten, khoa, nganh, sDT ,password, email);
+
+            thanhvien tv = new thanhvien(maTV, hoten, khoa, nganh, sDT, password, email);
             tvList.add(tv);
         }
         wb.close();
         return tvList;
     }
-    
+
     private void btnImportExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportExcelActionPerformed
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel files", "xls", "xlsx");
         chooser.addChoosableFileFilter(filter);
-        
+
         int result = chooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();
             try {
                 FileInputStream excelFIS = new FileInputStream(file);
                 BufferedInputStream excelBIS = new BufferedInputStream(excelFIS);
-                List<thanhvien> tvList = readDataFromExcel(excelBIS);   
+                List<thanhvien> tvList = readDataFromExcel(excelBIS);
                 if (!tvList.isEmpty()) {
                     for (thanhvien tv : tvList) {
                         if (thanhVienDAL.isMaTVExisted(tv.getMaTV())) {
@@ -545,8 +561,13 @@ public class thanhvienPanel extends javax.swing.JPanel {
                 Logger.getLogger(thanhvienPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } 
+        }
     }//GEN-LAST:event_btnImportExcelActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        nhapForm.setVisible(true);
+        nhapForm.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -556,6 +577,7 @@ public class thanhvienPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnImportExcel;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cbSearch;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
